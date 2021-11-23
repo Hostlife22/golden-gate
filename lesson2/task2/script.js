@@ -1,6 +1,6 @@
 const n = 12;
-let result = '';
+let sum = '';
 
 for (let i = 1; i <= 12; i++) {
-  result += String(i);
+  sum += String(i);
 }
