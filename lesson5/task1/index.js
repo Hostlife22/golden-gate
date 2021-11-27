@@ -1,12 +1,7 @@
-/**
- * @param {number} firstNum
- * @param {number} secondNum
- * @return {number}
- */
-function sum(firstNum, secondNum) {
-    return firstNum + secondNum;
-}
+export const getSquaredNumbers = (arr) => arr.map((num) => num * num);
 
-// examples
-sum(11, 11); // ==> 22
-sum(-2, 10); // ==> 8
+export const getOddNumbers = (arr) => arr.filter((num) => num % 2 === 1);
+
+export default function sum(a, b) {
+    return a + b;
+}
