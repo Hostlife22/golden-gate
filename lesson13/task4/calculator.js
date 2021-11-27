@@ -1,25 +1,27 @@
-export function calc(expression) {
+/* eslint-disable default-case */
+
+export const calc = (expression) => {
     if (typeof expression !== 'string') {
         return null;
     }
 
-    const [a, operator, b] = expression.split(' ');
+    const [a, operation, b] = expression.split(' ');
     let result;
 
-    switch (operator) {
+    switch (operation) {
         case '+':
             result = +a + +b;
             break;
         case '-':
-            result = a - b;
+            result = +a - +b;
             break;
         case '*':
-            result = a * b;
+            result = +a * +b;
             break;
         case '/':
-            result = a / b;
+            result = +a / +b;
             break;
     }
 
-    return result;
-}
+    return `${expression} = ${result}`;
+};
