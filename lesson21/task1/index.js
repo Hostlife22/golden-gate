@@ -1,12 +1,17 @@
 'use strict';
 
-const tasks = [
+export const tasks = [
     { text: 'Buy milk', done: false },
     { text: 'Pick up Tom from airport', done: false },
     { text: 'Visit party', done: false },
     { text: 'Visit doctor', done: true },
     { text: 'Buy meat', done: true },
 ];
+
+/**
+ * @param {object[]} tasksList
+ * @return {undefined}
+ */
 
 const renderTasks = (taskList) => {
     const listElement = document.querySelector('.list');
@@ -17,14 +22,15 @@ const renderTasks = (taskList) => {
             const listItemElem = document.createElement('li');
             listItemElem.classList.add('list__item');
 
-            const listItemCheckbox = document.createElement('input');
-            listItemCheckbox.setAttribute('type', 'checkbox');
-            listItemCheckbox.classList.add('list__item-checkbox');
-            listItemCheckbox.checked = done;
-
             if (done) {
                 listItemElem.classList.add('list__item-checkbox_done');
             }
+
+            const listItemCheckbox = document.createElement('input');
+            listItemCheckbox.setAttribute('type', 'checkbox');
+            listItemCheckbox.checked = done;
+            listItemCheckbox.classList.add('list__item-checkbox');
+
             listItemElem.append(listItemCheckbox, text);
 
             return listItemElem;
