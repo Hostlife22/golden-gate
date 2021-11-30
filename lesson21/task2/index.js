@@ -1,4 +1,4 @@
-const getTitleElement = () => {
+export const getTitleElement = () => {
     const titleElem = document.querySelector('.title');
 
     console.dir(titleElem);
@@ -7,7 +7,7 @@ const getTitleElement = () => {
 };
 getTitleElement();
 
-const getInputElement = () => {
+export const getInputElement = () => {
     const inputElement = document.querySelector('input[type="text"]', 'text');
 
     console.dir(inputElement);
