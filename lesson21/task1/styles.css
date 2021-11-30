@@ -8,15 +8,15 @@ body {
 
 .title {
   font-size: 24px;
-  font-weight: 700;
   text-align: center;
   text-transform: uppercase;
 }
 
 .todo-list {
   display: flex;
+  margin-top: 32px;
   max-width: 600px;
-  margin: 0 auto;
+  margin: auto;
   padding: 8px;
   background-color: #ff7f50;
   border-radius: 8px;
@@ -46,8 +46,9 @@ body {
 }
 
 .list {
+  margin: 0;
   width: 100%;
-  margin: 0 auto;
+  margin: auto;
   padding: 0;
   list-style-type: none;
 }
