@@ -20,3 +20,8 @@ export const getGoal = () => {
 
     return goal.outerHTML;
 };
+
+// console.log(getTitle());
+// console.log(getDescription());
+// console.log(getPlans());
+// console.log(getGoal());
