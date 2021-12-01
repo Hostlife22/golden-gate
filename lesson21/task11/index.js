@@ -1,4 +1,4 @@
-const manageClasses = () => {
+export const manageClasses = () => {
     const firstElement = document.querySelector('.one');
     firstElement.classList.add('selected');
 
@@ -17,4 +17,3 @@ const manageClasses = () => {
         fourElement.classList.remove('another-class');
     }
 };
-manageClasses();
