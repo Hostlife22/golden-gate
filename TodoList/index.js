@@ -1,9 +1,9 @@
 const tasks = [
-    { text: 'Buy milk', done: false, id: 13 },
-    { text: 'Pick up Tom from airport', done: false, id: 21 },
-    { text: 'Visit party', done: false, id: 22 },
-    { text: 'Visit doctor', done: true, id: 6 },
-    { text: 'Buy meat', done: true, id: 5 },
+    { text: 'Buy milk', done: false, id: '13' },
+    { text: 'Pick up Tom from airport', done: false, id: '21' },
+    { text: 'Visit party', done: false, id: '22' },
+    { text: 'Visit doctor', done: true, id: '6' },
+    { text: 'Buy meat', done: true, id: '5' },
 ];
 
 const listElem = document.querySelector('.list');
@@ -42,7 +42,6 @@ const createTaskElement = document.querySelector('.create-task-btn');
 
 const onCreateTask = () => {
     const taskInputElement = document.querySelector('.task-input');
-
     const textInput = taskInputElement.value;
 
     if (!textInput) {
@@ -68,11 +67,12 @@ const onToggleTask = (event) => {
     if (!isCheckbox) {
         return;
     }
-
-    const taskId = +event.target.dataset.id;
-    const result = tasks.findIndex((task) => task.id === taskId);
-
-    tasks[result].done = event.target.checked;
+    tasks.map((task) => {
+        if (task.id === event.target.dataset.id) {
+            task.done = event.target.checked;
+        }
+        return task;
+    });
 
     renderTasks();
 };
