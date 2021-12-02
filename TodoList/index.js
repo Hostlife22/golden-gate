@@ -47,7 +47,6 @@ const onCreateTask = () => {
     if (!textInput) {
         return;
     }
-
     taskInputElement.value = '';
     tasks.push({
         text: textInput,
@@ -68,7 +67,6 @@ const onToggleTask = (event) => {
     if (!isCheckbox) {
         return;
     }
-
     tasks.map((task) => {
         if (task.id === +event.target.dataset.id) {
             task.done = event.target.checked;
@@ -78,4 +76,5 @@ const onToggleTask = (event) => {
 
     renderTasks();
 };
+
 todoListElem.addEventListener('click', onToggleTask);
