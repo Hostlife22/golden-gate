@@ -42,6 +42,7 @@ const createTaskElement = document.querySelector('.create-task-btn');
 
 const onCreateTask = () => {
     const taskInputElement = document.querySelector('.task-input');
+
     const textInput = taskInputElement.value;
 
     if (!textInput) {
@@ -67,12 +68,11 @@ const onToggleTask = (event) => {
     if (!isCheckbox) {
         return;
     }
-    tasks.map((task) => {
-        if (task.id === +event.target.dataset.id) {
-            task.done = event.target.checked;
-        }
-        return task;
-    });
+
+    const taskId = +event.target.dataset.id;
+    const result = tasks.findIndex((task) => task.id === taskId);
+
+    tasks[result].done = event.target.checked;
 
     renderTasks();
 };
