@@ -5,8 +5,7 @@ const errorMailElement = document.querySelector('.error-text_email');
 const errorPasswordElement = document.querySelector('.error-text_password');
 
 const isRequired = (field) => (field ? undefined : 'Required');
-const isMail = (field) =>
-    field.includes('@') ? undefined : 'Should be an email';
+const isMail = (field) => (field.includes('@') ? undefined : 'Should be an email');
 
 const fieldValid = {
     email: [isRequired, isMail],
@@ -15,7 +14,6 @@ const fieldValid = {
 
 const onByValidator = (field, value) => {
     const fieldText = fieldValid[field];
-
     return fieldText
         .map((validator) => validator(value))
         .filter((error) => error)
@@ -40,6 +38,7 @@ const loginFormElement = document.querySelector('.login-form');
 const getFormFields = (event) => {
     event.preventDefault();
 
+    // eslint-disable-next-line node/no-unsupported-features/es-builtins
     const formData = Object.fromEntries(new FormData(loginFormElement));
 
     alert(JSON.stringify(formData));

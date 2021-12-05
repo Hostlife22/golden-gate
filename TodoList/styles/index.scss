@@ -63,7 +63,9 @@ body {
         align-items: center;
         &_done {
             opacity: 0.7;
-            text-decoration: line-through;
+            .list-item__text {
+                text-decoration: line-through;
+            }
         }
     }
 
