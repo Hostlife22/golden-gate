@@ -123,7 +123,6 @@ const onToggleTask = (e) => {
     }
     return task;
   });
-  console.log(tasks);
   renderTasks();
 };
 
