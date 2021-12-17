@@ -24,23 +24,21 @@ const studentsBirthDays = (students) => {
     'Nov',
     'Dec',
   ];
-  const filteredArray = [...students]
-    .sort((a, b) => new Date(a.birthDate).getDate() - new Date(b.birthDate).getDate())
-    .map(({ name, birthDate }) => [monthsArray[new Date(birthDate).getMonth()], name]);
-  //   [  { name: 'Tom', birthDate: '01/05/2010' }, { name: 'Ben', birthDate: '01/17/2008' }]  =>  [['Jan', 'Ben'], ['Jan', 'Tom'] ]
 
   const obj = {};
 
-  for (let i = 0; i < filteredArray.length; i++) {
-    if (!obj.hasOwnProperty(filteredArray[i][0])) {
-      obj[filteredArray[i][0]] = [filteredArray[i][1]];
-    } else {
-      obj[filteredArray[i][0]].push(filteredArray[i][1]);
-    }
-  }
+  [...students]
+    .sort((a, b) => new Date(a.birthDate).getDate() - new Date(b.birthDate).getDate())
+    .map(({ name, birthDate }) => [monthsArray[new Date(birthDate).getMonth()], name])
+    .map((student) => {
+      const [month, name] = student;
+
+      return !Object.prototype.hasOwnProperty.call(obj, month)
+        ? (obj[month] = [name])
+        : obj[month].push(name);
+    });
 
   return obj;
-  // [['Jan', 'Ben'], ['Jan', 'Tom'] ]  => Jan: ['Ben', 'Tom'] , Mar: ['Sam']
 };
 
 console.log(studentsBirthDays(studentsData));

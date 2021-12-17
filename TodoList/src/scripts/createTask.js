@@ -1,4 +1,4 @@
-import { tasks } from './storage.js';
+import { getItem, setItem } from './storage.js';
 import { renderTasks } from './renderer.js';
 
 export const onCreateTask = () => {
@@ -10,14 +10,16 @@ export const onCreateTask = () => {
     return;
   }
   taskTitleInputElem.value = '';
+  const taskList = getItem('tasksList') || [];
 
-  const newTask = {
+  const newTasksList = taskList.concat({
     text,
     done: false,
     createDate: new Date().toISOString(),
     id: Date.now().toString(),
-  };
+  });
 
-  tasks.push(newTask);
+  setItem('tasksList', newTasksList);
+
   renderTasks();
 };
