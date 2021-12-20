@@ -2,15 +2,13 @@ import { addImage } from './addImage.js';
 
 export const addImageV2 = (url) =>
   new Promise((resolve, reject) => {
-    const cb = (error, data) => {
+    addImage(url, (error, data) => {
       if (error) {
         reject(error);
       } else {
         resolve(data);
       }
-    };
-
-    addImage(url, cb);
+    });
   });
 
 addImageV2('https://server.com/image.png')
