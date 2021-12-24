@@ -9,8 +9,8 @@ const inputElem = document.querySelector('.name-form__input');
 const btnFormElem = document.querySelector('.name-form__btn');
 
 const renderUser = (data) => {
-  console.log(data);
   const { avatar_url, name, location } = data;
+
   userAvatarElem.src = avatar_url;
   userNameElem.textContent = name;
   userLocation.textContent = location;
