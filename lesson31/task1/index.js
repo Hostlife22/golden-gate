@@ -1,24 +1,27 @@
-const userNameElem = document.querySelector('.user__name');
-const userLocation = document.querySelector('.user__location');
 const userAvatarElem = document.querySelector('.user__avatar');
+const userNameElem = document.querySelector('.user__name');
+const userLocationElem = document.querySelector('.user__location');
 
-const fetchNameContent = (userName) =>
+const defaultAvatar = 'https://avatars3.githubusercontent.com/u10001';
+
+userAvatarElem.src = defaultAvatar;
+
+const fetchUserData = (userName) =>
   fetch(`https://api.github.com/users/${userName}`).then((response) => response.json());
 
-const inputElem = document.querySelector('.name-form__input');
-const btnFormElem = document.querySelector('.name-form__btn');
-
-const renderUser = (data) => {
-  const { avatar_url, name, location } = data;
-
+const redderUserData = (userData) => {
+  const { avatar_url, name, location } = userData;
   userAvatarElem.src = avatar_url;
   userNameElem.textContent = name;
-  userLocation.textContent = location;
+  userLocationElem.textContent = location ? `from ${location}` : '';
 };
 
-const onGetValue = () => {
-  const userName = inputElem.value;
-  fetchNameContent(userName).then((data) => renderUser(data));
+const showUserBtnElem = document.querySelector('.name-form__btn');
+const userNameInputElem = document.querySelector('.name-form__input');
+
+const onSearchUser = () => {
+  const userName = userNameInputElem.value;
+  fetchUserData(userName).then((userData) => redderUserData(userData));
 };
 
-btnFormElem.addEventListener('click', onGetValue);
+showUserBtnElem.addEventListener('click', onSearchUser);
