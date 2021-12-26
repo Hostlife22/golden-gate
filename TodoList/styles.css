@@ -53,6 +53,10 @@ body {
   list-style-type: none;
 }
 .list__item {
+  margin-bottom: 8px;
+}
+
+.list-item {
   display: flex;
   height: 40px;
   padding: 8px;
@@ -60,17 +64,37 @@ body {
   border-radius: 8px;
   align-items: center;
 }
-.list__item_done {
+.list-item_done {
   opacity: 0.7;
 }
-.list__item_done .list-item__text {
+.list-item_done .list-item__text {
   text-decoration: line-through;
 }
-.list__item + .list__item {
-  margin-top: 8px;
+.list-item:last-child {
+  margin-bottom: 0;
 }
-.list__item-checkbox {
+.list-item__checkbox {
   margin-right: 8px;
+}
+.list-item__delete-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  margin-left: auto;
+  text-decoration: none;
+  padding: 0;
+  transform: rotate(45deg);
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  opacity: 0.7;
+}
+.list-item__delete-btn::before {
+  content: "+";
 }
 
 /*# sourceMappingURL=styles.css.map */

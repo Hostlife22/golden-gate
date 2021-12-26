@@ -1,26 +1,23 @@
 import { renderTasks } from './renderer.js';
-import { setItem, getItem } from './storage.js';
+import { updateTask, getTasksList } from './tasksGateway.js';
 
-export const onToggleTask = (e) => {
-  const isCheckbox = e.target.classList.contains('list__item-checkbox');
+export const onToggleTask = e => {
+  const done = e.target.checked;
+  const taskId = e.target.dataset.id;
 
-  if (!isCheckbox) {
-    return;
-  }
+  let updateTaskItem;
 
-  const tasksList = getItem('tasksList');
-  const newTasksList = tasksList.map((task) => {
-    if (task.id === e.target.dataset.id) {
-      const done = e.target.checked;
-      return {
-        ...task,
+  getTasksList()
+    .then(tasksList => {
+      const { text, createDate } = tasksList.find(task => task.id === taskId);
+
+      updateTaskItem = {
+        text,
+        createDate,
         done,
         finishDate: done ? new Date().toISOString() : null,
       };
-    }
-    return task;
-  });
-  setItem('tasksList', newTasksList);
-
-  renderTasks();
+    })
+    .then(() => updateTask(taskId, updateTaskItem))
+    .then(() => renderTasks());
 };
