@@ -19,9 +19,10 @@ const createUser = data => {
     },
     body: JSON.stringify(data),
   })
-    .then(response => response.json())
-    .then(request => {
-      alert(JSON.stringify(request));
+    .then(response => response.text())
+    .then(responseData => {
+      alert(responseData);
+
       clearEventForm();
     });
 };
