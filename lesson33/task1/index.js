@@ -22,6 +22,7 @@ const createUser = data => {
     .then(response => response.json())
     .then(request => {
       alert(JSON.stringify(request));
+      clearEventForm();
     });
 };
 
@@ -30,8 +31,8 @@ const onSubmitForm = e => {
 
   const formData = Object.fromEntries(new FormData(form));
 
+  checkValidForm();
   createUser(formData);
-  clearEventForm();
 };
 
 form.addEventListener('keyup', checkValidForm);
