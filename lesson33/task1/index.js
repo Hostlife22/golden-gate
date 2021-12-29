@@ -2,7 +2,12 @@ const formElem = document.querySelector('.login-form');
 const submitBtnElem = document.querySelector('.submit-button');
 
 const onInputChange = () => {
-  submitBtnElem.disabled = !formElem.reportValidity();
+  const isValidForm = formElem.reportValidity();
+  if (isValidForm) {
+    submitBtnElem.removeAttribute('disabled');
+  } else {
+    submitBtnElem.setAttribute('disabled', true);
+  }
 };
 
 const clearForm = () => {
@@ -34,8 +39,12 @@ const onSubmitForm = e => {
     {},
   );
 
+  if (!onInputChange()) {
+    return;
+  }
+
   createUser(formData);
 };
 
-formElem.addEventListener('input', onInputChange);
+formElem.addEventListener('keyup', onInputChange);
 formElem.addEventListener('submit', onSubmitForm);
