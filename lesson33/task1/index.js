@@ -23,6 +23,7 @@ const createUser = data => {
     .then(response => response.text())
     .then(responseData => {
       clearForm();
+      onInputChange();
       alert(responseData);
     });
 };
@@ -32,7 +33,6 @@ const onSubmitForm = e => {
 
   const formData = Object.fromEntries(new FormData(formElem));
 
-  onInputChange();
   createUser(formData);
 };
 
