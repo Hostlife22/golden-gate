@@ -2,14 +2,7 @@ const formElem = document.querySelector('.login-form');
 const submitBtnElem = document.querySelector('.submit-button');
 
 const onInputChange = () => {
-  const isValidForm = formElem.reportValidity();
-  if (isValidForm) {
-    submitBtnElem.removeAttribute('disabled');
-  } else {
-    submitBtnElem.setAttribute('disabled', true);
-  }
-
-  return isValidForm;
+  submitBtnElem.disabled = !formElem.reportValidity();
 };
 
 const clearForm = () => {
@@ -40,10 +33,6 @@ const onSubmitForm = e => {
     (acc, [prop, value]) => ({ ...acc, [prop]: value }),
     {},
   );
-
-  if (!onInputChange()) {
-    return;
-  }
 
   createUser(formData);
 };
