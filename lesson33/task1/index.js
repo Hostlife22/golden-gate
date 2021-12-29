@@ -37,5 +37,5 @@ const onSubmitForm = e => {
   createUser(formData);
 };
 
-formElem.addEventListener('keyup', onInputChange);
+formElem.addEventListener('input', onInputChange);
 formElem.addEventListener('submit', onSubmitForm);
