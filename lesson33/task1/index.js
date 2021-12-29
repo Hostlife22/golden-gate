@@ -8,6 +8,8 @@ const onInputChange = () => {
   } else {
     submitBtnElem.setAttribute('disabled', true);
   }
+
+  return isValidForm;
 };
 
 const clearForm = () => {
@@ -39,7 +41,10 @@ const onSubmitForm = e => {
     {},
   );
 
-  onInputChange();
+  if (!onInputChange()) {
+    return;
+  }
+
   createUser(formData);
 };
 
