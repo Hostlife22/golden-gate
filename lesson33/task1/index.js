@@ -2,11 +2,11 @@ const formElem = document.querySelector('.login-form');
 const submitBtnElem = document.querySelector('.submit-button');
 
 const onInputChange = () =>
-  formElem.reportValidity() === true
+  formElem.reportValidity()
     ? submitBtnElem.removeAttribute('disabled')
     : submitBtnElem.setAttribute('disabled', true);
 
-const clearEventForm = () => {
+const clearForm = () => {
   formElem.reset();
 };
 
@@ -18,13 +18,11 @@ const createUser = data => {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify({
-      user: data,
-    }),
+    body: JSON.stringify(data),
   })
     .then(response => response.text())
     .then(responseData => {
-      clearEventForm();
+      clearForm();
       alert(responseData);
     });
 };
@@ -33,12 +31,9 @@ const onSubmitForm = e => {
   e.preventDefault();
 
   const formData = Object.fromEntries(new FormData(formElem));
-  const textForm = Object.entries(formData)
-    .map(([k, v]) => `${k}: ${v}`)
-    .join(', ');
 
   onInputChange();
-  createUser(textForm);
+  createUser(formData);
 };
 
 formElem.addEventListener('keyup', onInputChange);
