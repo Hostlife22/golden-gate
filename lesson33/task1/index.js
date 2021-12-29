@@ -39,6 +39,7 @@ const onSubmitForm = e => {
     {},
   );
 
+  onInputChange();
   createUser(formData);
 };
 
