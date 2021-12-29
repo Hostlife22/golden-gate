@@ -30,7 +30,10 @@ const createUser = formData => {
 const onSubmitForm = e => {
   e.preventDefault();
 
-  const formData = Object.fromEntries(new FormData(formElem));
+  const formData = [...new FormData(formElem)].reduce(
+    (acc, [prop, value]) => ({ ...acc, [prop]: value }),
+    {},
+  );
 
   createUser(formData);
 };
