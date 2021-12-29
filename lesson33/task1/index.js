@@ -39,10 +39,6 @@ const onSubmitForm = e => {
     {},
   );
 
-  if (!onInputChange()) {
-    return;
-  }
-
   createUser(formData);
 };
 
