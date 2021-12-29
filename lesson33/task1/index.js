@@ -11,7 +11,7 @@ const clearForm = () => {
   submitBtnElem.setAttribute('disabled', true);
 };
 
-const createUser = data => {
+const createUser = formData => {
   const baseUrl = 'https://61c8c4dcadee460017260de8.mockapi.io/form';
 
   return fetch(baseUrl, {
@@ -19,11 +19,11 @@ const createUser = data => {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(formData),
   })
     .then(response => response.text())
-    .then(responseData => {
-      alert(responseData);
+    .then(data => {
+      alert(data);
       clearForm();
     });
 };
