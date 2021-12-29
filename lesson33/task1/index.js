@@ -1,14 +1,25 @@
 const formElem = document.querySelector('.login-form');
 const submitBtnElem = document.querySelector('.submit-button');
 
-const onInputChange = () =>
-  formElem.reportValidity()
-    ? submitBtnElem.removeAttribute('disabled')
-    : submitBtnElem.setAttribute('disabled', true);
+function isEmpty() {
+  const formData = Object.fromEntries(new FormData(formElem));
+
+  return Object.values(formData)
+    .map(el => el.trim())
+    .includes('');
+}
+
+const onInputChange = () => {
+  const isValidForm = formElem.reportValidity();
+  if (isValidForm && !isEmpty()) {
+    submitBtnElem.removeAttribute('disabled');
+  } else {
+    submitBtnElem.setAttribute('disabled', true);
+  }
+};
 
 const clearForm = () => {
   formElem.reset();
-  submitBtnElem.setAttribute('disabled', true);
 };
 
 const createUser = formData => {
@@ -35,7 +46,6 @@ const onSubmitForm = e => {
     (acc, [prop, value]) => ({ ...acc, [prop]: value }),
     {},
   );
-
   createUser(formData);
 };
 
