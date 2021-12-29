@@ -1,12 +1,13 @@
-const form = document.querySelector('.login-form');
-const btn = document.querySelector('.submit-button');
+const formElem = document.querySelector('.login-form');
+const submitBtnElem = document.querySelector('.submit-button');
 
-const checkValidForm = () => {
-  btn.disabled = !form.reportValidity();
-};
+const onInputChange = () =>
+  formElem.reportValidity() === true
+    ? submitBtnElem.removeAttribute('disabled')
+    : submitBtnElem.setAttribute('disabled', true);
 
 const clearEventForm = () => {
-  form.reset();
+  formElem.reset();
 };
 
 const createUser = data => {
@@ -17,24 +18,28 @@ const createUser = data => {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      user: data,
+    }),
   })
     .then(response => response.text())
     .then(responseData => {
-      alert(responseData);
-
       clearEventForm();
+      alert(responseData);
     });
 };
 
 const onSubmitForm = e => {
   e.preventDefault();
 
-  const formData = Object.fromEntries(new FormData(form));
+  const formData = Object.fromEntries(new FormData(formElem));
+  const textForm = Object.entries(formData)
+    .map(([k, v]) => `${k}: ${v}`)
+    .join(', ');
 
-  checkValidForm();
-  createUser(formData);
+  onInputChange();
+  createUser(textForm);
 };
 
-form.addEventListener('keyup', checkValidForm);
-btn.addEventListener('click', onSubmitForm);
+formElem.addEventListener('keyup', onInputChange);
+submitBtnElem.addEventListener('click', onSubmitForm);
