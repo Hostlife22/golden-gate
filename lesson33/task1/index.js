@@ -8,7 +8,6 @@ const onInputChange = () =>
 
 const clearForm = () => {
   formElem.reset();
-  submitBtnElem.setAttribute('disabled', true);
 };
 
 const createUser = formData => {
