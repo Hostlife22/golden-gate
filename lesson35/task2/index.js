@@ -1,16 +1,18 @@
-const getUser = async userId => {
-  try {
-    const response = await fetch(`https://api.github.com/users/${userId}`);
+const getUserData = userId =>
+  fetch(`https://api.github.com/users/${userId}`).then(response => {
     if (!response.ok) {
       return null;
     }
-    const userData = await response.json();
-    return userData;
+    return response.json();
+  });
+
+const getUsersBlogs = async usersId => {
+  try {
+    const allPromise = usersId.map(user => getUserData(user));
+    const response = await Promise.all(allPromise);
+    return response.includes(null) ? null : response.map(({ blog }) => blog);
   } catch (err) {
-    throw new Error('User to fetch user');
+    throw new Error('Failed to fetch user');
   }
 };
-
-getUser('facebook')
-  .then(userData => console.log(userData))
-  .catch(err => alert(err.message));
+getUsersBlogs(['godogle', 'facebook']).then(list => console.log(list));
