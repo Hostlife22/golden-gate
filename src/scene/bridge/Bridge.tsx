@@ -6,10 +6,13 @@ import { Instances } from '../Instances';
 import type { Instance } from '../Instances';
 import { beam, cablePoints, suspenderData } from './geometry';
 import { DistanceDetail } from '../DistanceDetail';
+import { useMaterials } from '../materials/context';
 function Tower({ z }: { z: number }) {
-  const { steel, accents, concrete } = useMemo(() => {
+  const materials = useMaterials();
+  const { steel, accents, concrete, rivets } = useMemo(() => {
     const steel: Instance[] = [],
       accents: Instance[] = [];
+    const rivets: Instance[] = [];
     const levels = [1.1, 7.4, 11.2, 14.9, 18.3, 21.6, 22.7].map(
       (y) => (y * BRIDGE.towerHeight) / 22.7,
     );
@@ -44,6 +47,13 @@ function Tower({ z }: { z: number }) {
           scale: [width + 0.055, 0.11, 1.64 - i * 0.13],
           color: PALETTE.orangeDark,
         });
+        for (const face of [-1, 1])
+          for (const dx of [-0.35, 0.35])
+            for (let y = bottom + 0.12; y < top - 0.06; y += 0.23)
+              rivets.push({
+                position: [x + width * dx, y, z + face * (depth / 2 + 0.06)],
+                scale: [0.016, 0.016, 0.01],
+              });
       }
     }
     for (const y of [7.15, 10.8, 14.55, 18.05, 21.1].map((y) => (y * BRIDGE.towerHeight) / 22.7)) {
@@ -67,15 +77,36 @@ function Tower({ z }: { z: number }) {
     return {
       steel,
       accents,
+      rivets,
       concrete: [{ position: [0, 0.35, z] as const, scale: [5.3, 1.5, 3.1] as const }],
     };
   }, [z]);
   return (
     <group>
-      <Instances items={concrete} color={PALETTE.concrete} castShadow />
-      <Instances items={steel} color={PALETTE.orange} castShadow />
+      <Instances
+        items={concrete}
+        color="#ddd6c1"
+        material={materials.concrete}
+        shape="beveled"
+        castShadow
+      />
+      <Instances
+        items={steel}
+        color={PALETTE.orange}
+        material={materials.paint}
+        shape="beveled"
+        castShadow
+      />
       <DistanceDetail distance={380}>
-        <Instances items={accents} color={PALETTE.orangeLight} />
+        <Instances items={accents} color={PALETTE.orangeLight} material={materials.paint} />
+      </DistanceDetail>
+      <DistanceDetail distance={130}>
+        <Instances
+          items={rivets}
+          color={PALETTE.orangeLight}
+          shape="sphere"
+          material={materials.paint}
+        />
       </DistanceDetail>
     </group>
   );
@@ -119,6 +150,7 @@ function Cables() {
   );
 }
 export function Bridge() {
+  const materials = useMaterials();
   const parts = useMemo(() => {
     const road: Instance[] = [],
       truss: Instance[] = [],
@@ -167,13 +199,13 @@ export function Bridge() {
       <Tower z={-HALF_SPAN} />
       <Tower z={HALF_SPAN} />
       <Cables />
-      <Instances items={parts.road} color={PALETTE.road} />
-      <Instances items={parts.truss} color={PALETTE.orange} castShadow />
-      <Instances items={parts.walk} color={PALETTE.sidewalk} />
-      <Instances items={parts.rails} color={PALETTE.rail} />
+      <Instances items={parts.road} color="#c4c7c3" material={materials.asphalt} />
+      <Instances items={parts.truss} color={PALETTE.orange} material={materials.paint} castShadow />
+      <Instances items={parts.walk} color="#d0cbbd" material={materials.concrete} />
+      <Instances items={parts.rails} color={PALETTE.rail} material={materials.paint} />
       <Instances items={parts.markings} color="#e5e1c8" />
-      <Instances items={parts.lamps} color={PALETTE.orangeDark} />
-      <Instances items={parts.supports} color={PALETTE.orange} />
+      <Instances items={parts.lamps} color={PALETTE.orangeDark} material={materials.paint} />
+      <Instances items={parts.supports} color={PALETTE.orange} material={materials.paint} />
       <Instances
         items={[-ANCHOR, ANCHOR].flatMap((z): Instance[] => [
           { position: [0, 0.8, z], scale: [5.6, 2.4, 4.2] },
@@ -182,7 +214,9 @@ export function Bridge() {
             scale: [1.5, 9, 4],
           })),
         ])}
-        color={PALETTE.concrete}
+        color="#d9d2be"
+        material={materials.concrete}
+        shape="beveled"
         castShadow
       />
     </group>

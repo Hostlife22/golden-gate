@@ -1,0 +1,116 @@
+{
+  "license": "CC0-1.0",
+  "licenseUrl": "https://polyhaven.com/license",
+  "date": "2026-10-03",
+  "processing": "Original 1K JPEG maps encoded as WebP: normal maps quality 95, albedo and roughness quality 88. No resized maps.",
+  "assets": [
+    {
+      "asset": "aerial_grass_rock",
+      "map": "diff",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_diff_1k.jpg",
+      "local": "public/assets/materials/aerial_grass_rock_diff.webp",
+      "sourceSha256": "57b8041bfe0d0f01430e4dbaad45e7ddddf0a9fc97317f90dbc51f7b0d9e1b5d",
+      "sha256": "a12eeb34588cd561e0047cf60e4f399c8f8a77b4510ac65f71e0e7a0918d07c4",
+      "bytes": 302672
+    },
+    {
+      "asset": "aerial_grass_rock",
+      "map": "nor_gl",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_nor_gl_1k.jpg",
+      "local": "public/assets/materials/aerial_grass_rock_nor_gl.webp",
+      "sourceSha256": "1aa3e23bff453f152e089b9f83aa36b4901651e019f7e2ca01d5331a9bbbda78",
+      "sha256": "400c70c8661d2e25d588c185aa699a3292cc8e4258e9a798773f35ab4d8c014c",
+      "bytes": 499752
+    },
+    {
+      "asset": "aerial_grass_rock",
+      "map": "rough",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_rough_1k.jpg",
+      "local": "public/assets/materials/aerial_grass_rock_rough.webp",
+      "sourceSha256": "b9f3f76aba74007f708333c0dbe73c52eb83ea0c4187a13e2e994f888a25114a",
+      "sha256": "6a47c21c949e7ce49005fcb4693de6c13661bd8f774e162ebb1e4474c033dc0c",
+      "bytes": 193258
+    },
+    {
+      "asset": "rocky_terrain",
+      "map": "diff",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocky_terrain/rocky_terrain_diff_1k.jpg",
+      "local": "public/assets/materials/rocky_terrain_diff.webp",
+      "sourceSha256": "429315865fd89c150272592f6d93def174c6f69804a565ff08e53627a885579b",
+      "sha256": "9d0a4582e4e1c9c6ded9b89f53a71cf10d8c2420c456cb47e50847e523f3aeb5",
+      "bytes": 307752
+    },
+    {
+      "asset": "rocky_terrain",
+      "map": "nor_gl",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocky_terrain/rocky_terrain_nor_gl_1k.jpg",
+      "local": "public/assets/materials/rocky_terrain_nor_gl.webp",
+      "sourceSha256": "a6556e1220c6e6c822e68ceeb9589719e4db8c87340199657cc705fea6ecf391",
+      "sha256": "a32029a3ec7ea1f6d02472f0ab5eb5c0ee8d2d59fa9921ee3d27259caf57e279",
+      "bytes": 520944
+    },
+    {
+      "asset": "rocky_terrain",
+      "map": "rough",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocky_terrain/rocky_terrain_rough_1k.jpg",
+      "local": "public/assets/materials/rocky_terrain_rough.webp",
+      "sourceSha256": "b37dfff29fff10a219bfe73886940625df63b345289ea6b71ec5f6ddadc8adcb",
+      "sha256": "2ca85f0d12b5ee7e4d0af292d4909640786a9218763d55f6055b1387a9a1324e",
+      "bytes": 77058
+    },
+    {
+      "asset": "asphalt_02",
+      "map": "diff",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_02/asphalt_02_diff_1k.jpg",
+      "local": "public/assets/materials/asphalt_02_diff.webp",
+      "sourceSha256": "1aa5ce99f58a625c71d48cfc3e68b65ca85ccb00f39e045c0a928608a0ea25ed",
+      "sha256": "6fa9b60caa8603b66db0e7a81a66388b2664afe74b6544fed3f54b3584d6ba52",
+      "bytes": 455624
+    },
+    {
+      "asset": "asphalt_02",
+      "map": "nor_gl",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_02/asphalt_02_nor_gl_1k.jpg",
+      "local": "public/assets/materials/asphalt_02_nor_gl.webp",
+      "sourceSha256": "42a1c381b53204e83a982db2864479a30bc127bbdeebb1006f8ee51bff099df3",
+      "sha256": "ee5f92addd060b7580b3dd42df209cd7ae07b21835f8f235dffd771f333b648f",
+      "bytes": 621436
+    },
+    {
+      "asset": "asphalt_02",
+      "map": "rough",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_02/asphalt_02_rough_1k.jpg",
+      "local": "public/assets/materials/asphalt_02_rough.webp",
+      "sourceSha256": "70ba3edc65525eb4dc366cf010ca7ae0bd34e0251ff0225c2dad627a873d0712",
+      "sha256": "559255d2aa08b0608b79523db44819b8f745b2fcafcef9c561353471e3a62bb3",
+      "bytes": 360304
+    },
+    {
+      "asset": "concrete_layers_02",
+      "map": "diff",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_layers_02/concrete_layers_02_diff_1k.jpg",
+      "local": "public/assets/materials/concrete_layers_02_diff.webp",
+      "sourceSha256": "cca314fbb793e3928111912f1d6d4d79edf4420402e56019d70fec0bdc2efca5",
+      "sha256": "d232ac24a5da5bf6ad38db97e1364be4602b0629fcc03435197496c76f17c163",
+      "bytes": 143900
+    },
+    {
+      "asset": "concrete_layers_02",
+      "map": "nor_gl",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_layers_02/concrete_layers_02_nor_gl_1k.jpg",
+      "local": "public/assets/materials/concrete_layers_02_nor_gl.webp",
+      "sourceSha256": "ee35d817b5fa26f824479ef9d3a5ab308f4f33846c7d62d6583457dc900c6049",
+      "sha256": "8b87b05a0422a9282a975c975637a9b831dcc319c35ac529dd827bbc3a414d3f",
+      "bytes": 351636
+    },
+    {
+      "asset": "concrete_layers_02",
+      "map": "rough",
+      "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_layers_02/concrete_layers_02_rough_1k.jpg",
+      "local": "public/assets/materials/concrete_layers_02_rough.webp",
+      "sourceSha256": "1120d3546b604db2db5ef300f2e16d4aee211d09e3b6ca67ce2350f714d9d087",
+      "sha256": "bda296d113f8282bf75cd270f2bd471541cb9c4f0e458129ef852d251948e226",
+      "bytes": 58316
+    }
+  ]
+}

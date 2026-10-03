@@ -1,6 +1,5 @@
 import {
   BoxGeometry,
-  Color,
   Group,
   Mesh,
   MeshBasicMaterial,
@@ -18,7 +17,7 @@ export function reflectionScene() {
     material = new MeshBasicMaterial({ color: PALETTE.orange }),
     road = new MeshBasicMaterial({ color: PALETTE.road }),
     concrete = new MeshBasicMaterial({ color: PALETTE.concrete });
-  scene.background = new Color('#b7c7ca');
+  scene.background = null;
   group.rotation.y = -BRIDGE_ANGLE;
   scene.add(group);
   function part(

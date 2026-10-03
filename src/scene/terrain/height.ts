@@ -6,6 +6,7 @@ import {
   pointSegmentDistance,
   smoothstep,
   worldToBridge,
+  terrainNoise,
 } from '../../simulation/math';
 export const LAND_POLYGONS: Point2[][] = coastline.rings.map((ring) =>
   ring.map((p) => project(p[0], p[1])),
@@ -40,7 +41,7 @@ function hill(x: number, z: number, cx: number, cz: number, r: number, h: number
 export function terrainHeight(x: number, z: number, distance?: number): number {
   if (!isLand(x, z)) return -1.8;
   const d = distance ?? shoreDistance(x, z),
-    coast = smoothstep(d / 11);
+    coast = smoothstep(d / (z < -60 ? 5.5 : 8.0));
   let h: number;
   if (z < -60) {
     h =
@@ -48,15 +49,15 @@ export function terrainHeight(x: number, z: number, distance?: number): number {
       hill(x, z, -260, -230, 150, 21) +
       hill(x, z, -360, -100, 85, 12) +
       hill(x, z, 95, -360, 125, 22);
-    h += 1.1 * Math.sin(x * 0.12 + z * 0.15) * Math.cos(z * 0.11 - x * 0.09);
-    h += 2.0 * Math.sin(x * 0.038 + z * 0.04) + 1.1 * Math.cos(x * 0.073 - z * 0.027);
+    h += terrainNoise(x * 0.034, z * 0.034) * 9;
+    h += terrainNoise(x * 0.15, z * 0.15) * 1.8;
   } else {
     h =
       hill(x, z, -50, 200, 90, 10.4) +
       hill(x, z, 185, 330, 100, 9.8) +
       hill(x, z, 480, 260, 63, 11) +
       hill(x, z, 370, 490, 130, 18);
-    h += 0.6 * Math.sin(x * 0.037) * Math.cos(z * 0.025);
+    h += terrainNoise(x * 0.045, z * 0.045) * 2.0;
   }
   const a = LANDMARKS.alcatraz;
   if (Math.hypot(x - a[0], z - a[1]) < 24) h = 3.5;

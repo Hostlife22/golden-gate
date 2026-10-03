@@ -37,10 +37,23 @@ The [deployed Hero capture](artifacts/deployed-hero.png) was also opened and ins
 - Added lower-detail distant city blocks beyond the initial near-neighborhood rectangle.
 - Awaited flights after resize so mobile and short-window evidence depicts completed presets.
 
+## Graphics refinement
+
+The initial plain-material scene is preserved in [before Hero](artifacts/before-hero-golden.png), [before Tower Detail](artifacts/before-tower-detail.png) and [before performance](artifacts/before-performance.json). The current captures above show the graphics refinement requested after the first deployment.
+
+- Added local CC0 photographic albedo, normal and roughness maps for soil/grass, cliffs/boulders, asphalt and concrete, with linear data maps and bounded anisotropy.
+- Replaced a coarse terrain mesh with 26 m / 17 m near spacing and continuous multi-scale terrain noise; steeper coastal profiles expose textured rock.
+- Replaced cone trees and box rocks with trunks, asymmetric merged crowns, scrub clusters and irregular boulders.
+- Added rounded tower plate/foundation edges, near-view rivets, more legible paint highlights and textured road surfaces.
+- Replaced large residential slabs with terraced footprints, courtyard space, window patterns, roofs and rooftop equipment; refined the Salesforce crown.
+- Added rounded car bodies, glass canopies and wheels; curved extruded ship hulls, container edges, cabin glazing and a bowed cloth sail.
+- Replaced the flat sky gradient with analytical daylight/cloud scattering, generated environment lighting and matching sky reflection on water.
+- Fixed visible texture repetition, an overexposed first sky pass, distant ripple aliasing and overly white tiled distant city blocks found in intermediate captures. Reduced distant normal detail and used a cheaper dominant projection in Balanced after an intermediate frame-time regression.
+
 ## Remaining visual approximations
 
-The overall map relationships and verified bridge ratios are consistent, but this is an architectural interpretation. Natural Earth generalization produces simplified coves and some tens-to-hundreds-of-metres shoreline offsets near the bridge. Terrain is a seeded height field, not scanned or surveyed ground. Rock details and trees are sparse instanced shapes. The city is visibly schematic, with regular near blocks and merged distant massing; only two named downtown silhouettes have explicit locations. The Alcatraz perimeter/cellhouse and Fort Point massing are simplified.
+The overall map relationships and verified bridge ratios are consistent, but this is an architectural interpretation. Natural Earth generalization produces simplified coves and some tens-to-hundreds-of-metres shoreline offsets near the bridge. Terrain is a seeded height field, not scanned or surveyed ground. Terrain color/material maps are generic CC0 scans rather than scans of these shores. Trees, scrub and boulders remain economical procedural instances. The city is visibly schematic, with regular near blocks and merged distant massing; only two named downtown silhouettes have explicit locations. The Alcatraz perimeter/cellhouse and Fort Point massing are simplified.
 
 Main cable sag, portal band locations, leg plate profiles, anchorages, approach curvature, railings, lamps, and foundation footprints are illustrative. Paired suspenders are slightly enlarged for readability. The northern foundation intersects generalized land rather than a precisely modeled shoreline.
 
-Reflection only renders the bridge proxy. It remains approximate and can soften into visible low-resolution shapes at grazing angles, especially Balanced; land, city, moving traffic/ships, and local fog are absent from the mirror pass. Water uses low swell and analytical normals with stylized coastal shading, not measured tides/currents. Fog consists of economical soft spatial layers, so oblique views can reveal a bank-like layered appearance rather than natural volumetric scattering. There is no live weather, AIS, real-time road management, cinematic tour, or Blue Hour preset.
+Planar reflection only renders the bridge proxy, combined with the generated sky environment. It remains approximate and can soften into visible low-resolution shapes at grazing angles, especially Balanced; land, city, moving traffic/ships, and local fog are absent from the mirror pass. Water uses low swell and analytical normals with stylized coastal shading, not measured tides/currents. Fog consists of economical soft spatial layers, so oblique views can reveal a bank-like layered appearance rather than natural volumetric scattering. There is no live weather, AIS, real-time road management, cinematic tour, or Blue Hour preset.

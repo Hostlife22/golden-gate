@@ -16,6 +16,27 @@ export function seeded(seed: number) {
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 }
+/** Continuous deterministic value noise; no random state or frame allocations. */
+function coordinateHash(a: number, b: number) {
+  const v = Math.sin(a * 127.1 + b * 311.7) * 43758.5453;
+  return v - Math.floor(v);
+}
+export function noise2(x: number, z: number) {
+  const ix = Math.floor(x),
+    iz = Math.floor(z),
+    fx = smoothstep(x - ix),
+    fz = smoothstep(z - iz);
+  const a = coordinateHash(ix, iz) * (1 - fx) + coordinateHash(ix + 1, iz) * fx;
+  const b = coordinateHash(ix, iz + 1) * (1 - fx) + coordinateHash(ix + 1, iz + 1) * fx;
+  return a * (1 - fz) + b * fz;
+}
+export function terrainNoise(x: number, z: number) {
+  return (
+    (noise2(x, z) - 0.5) * 0.6 +
+    (noise2(x * 2.1 + 17, z * 2.1 + 31) - 0.5) * 0.28 +
+    (noise2(x * 4.3, z * 4.3) - 0.5) * 0.12
+  );
+}
 export function cableHeight(z: number): number {
   const a = Math.abs(z);
   if (a <= HALF_SPAN)

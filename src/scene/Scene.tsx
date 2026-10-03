@@ -9,6 +9,7 @@ import { Atmosphere } from './atmosphere/Atmosphere';
 import { Traffic } from './traffic/Traffic';
 import { Vessels } from './vessels/Vessels';
 import { CameraRig } from './cameras/CameraRig';
+import { MaterialLibrary } from './materials/MaterialLibrary';
 export default function Scene() {
   const { settings, runtime, ready } = useObservatory(),
     { gl, camera } = useThree();
@@ -57,7 +58,7 @@ export default function Scene() {
     m.triangles = gl.info.render.triangles;
   }, -100);
   return (
-    <>
+    <MaterialLibrary>
       <Atmosphere />
       <Terrain />
       <City />
@@ -66,6 +67,6 @@ export default function Scene() {
       <Traffic />
       <Vessels />
       <CameraRig />
-    </>
+    </MaterialLibrary>
   );
 }

@@ -21,7 +21,7 @@ import { waterFragment, waterVertex } from './shaders';
 import { coastalField } from './coastalField';
 export function Water() {
   const { runtime, settings } = useObservatory(),
-    { gl, camera } = useThree();
+    { gl, camera, scene } = useThree();
   const coast = useMemo(coastalField, []);
   useEffect(() => () => coast.texture.dispose(), [coast]);
   const resources = useMemo(() => {
@@ -34,7 +34,8 @@ export function Water() {
       clip = new Vector4(),
       q = new Vector4(),
       look = new Vector3(),
-      direction = new Vector3();
+      direction = new Vector3(),
+      clearColor = new Color();
     const uniforms = UniformsUtils.merge([
       UniformsLib.fog,
       {
@@ -44,6 +45,7 @@ export function Water() {
         uSun: { value: new Color() },
         uSunDirection: { value: new Vector3() },
         uReflection: { value: null },
+        uEnvironment: { value: null },
         uCoast: { value: null },
         uCoastBounds: { value: coast.bounds },
         uReflectionMatrix: { value: matrix },
@@ -71,6 +73,7 @@ export function Water() {
       q,
       look,
       direction,
+      clearColor,
       material,
       geometry,
     };
@@ -89,6 +92,7 @@ export function Water() {
       w = runtime.weather,
       u = r.material.uniforms;
     u.uTime.value = runtime.clock.time;
+    u.uEnvironment.value = scene.environment;
     u.uWater.value.copy(w.water);
     u.uSky.value.copy(w.sky);
     u.uSun.value.copy(w.sun);
@@ -126,11 +130,14 @@ export function Water() {
     p[6] = r.clip.y;
     p[10] = r.clip.z + 1;
     p[14] = r.clip.w;
-    (r.reflection.scene.background as Color).copy(w.sky);
     const previous = gl.getRenderTarget();
+    const alpha = gl.getClearAlpha();
+    gl.getClearColor(r.clearColor);
     gl.setRenderTarget(r.target);
+    gl.setClearColor(0x000000, 0);
     gl.render(r.reflection.scene, mirror);
     gl.setRenderTarget(previous);
+    gl.setClearColor(r.clearColor, alpha);
   }, -2);
   return (
     <mesh

@@ -4,15 +4,16 @@ import {
   BufferGeometry,
   DoubleSide,
   Float32BufferAttribute,
+  ExtrudeGeometry,
   Group,
   ShaderMaterial,
   Shape,
-  ShapeGeometry,
 } from 'three';
 import { useObservatory } from '../../app/state';
 import { VESSELS, vesselAt } from '../../simulation/routes';
 import type { VesselRoute } from '../../simulation/routes';
 import { Instances } from '../Instances';
+import { useMaterials } from '../materials/context';
 function Wake({ route }: { route: VesselRoute }) {
   const { runtime, settings } = useObservatory();
   const point = useMemo(() => ({ x: 0, z: 0, heading: 0 }), []);
@@ -81,6 +82,8 @@ function Wake({ route }: { route: VesselRoute }) {
   return <mesh geometry={geometry} material={material} frustumCulled={false} renderOrder={2} />;
 }
 function Vessel({ route }: { route: VesselRoute }) {
+  const materials = useMaterials();
+  const point = useMemo(() => ({ x: 0, z: 0, heading: 0 }), []);
   const ref = useRef<Group>(null),
     { runtime } = useObservatory();
   const cargo = route.type === 'cargo',
@@ -89,14 +92,58 @@ function Vessel({ route }: { route: VesselRoute }) {
     width = length * (cargo ? 0.18 : 0.27);
   const hull = useMemo(() => {
     const shape = new Shape();
-    shape.moveTo(-length / 2, -width / 2);
-    shape.lineTo(length * 0.3, -width / 2);
-    shape.lineTo(length / 2, 0);
-    shape.lineTo(length * 0.3, width / 2);
-    shape.lineTo(-length / 2, width / 2);
+    shape.moveTo(-length / 2, -width * 0.42);
+    shape.quadraticCurveTo(-length * 0.45, -width / 2, -length * 0.32, -width / 2);
+    shape.lineTo(length * 0.22, -width / 2);
+    shape.quadraticCurveTo(length * 0.44, -width * 0.45, length / 2, 0);
+    shape.quadraticCurveTo(length * 0.44, width * 0.45, length * 0.22, width / 2);
+    shape.lineTo(-length * 0.32, width / 2);
+    shape.quadraticCurveTo(-length * 0.45, width / 2, -length / 2, width * 0.42);
     shape.closePath();
-    return new ShapeGeometry(shape);
-  }, [length, width]);
+    return new ExtrudeGeometry(shape, {
+      depth: cargo ? 0.65 : 0.26,
+      bevelEnabled: true,
+      bevelSize: 0.025,
+      bevelThickness: 0.045,
+      bevelSegments: 2,
+      curveSegments: 12,
+    });
+  }, [length, width, cargo]);
+  const sailGeometry = useMemo(() => {
+    const positions: number[] = [],
+      indices: number[] = [],
+      rows = 12,
+      cols = 6;
+    for (let j = 0; j <= rows; j++)
+      for (let i = 0; i <= cols; i++) {
+        const u = i / cols,
+          v = j / rows;
+        positions.push(
+          0.72 * u * (1 - v),
+          0.34 + 1.6 * v,
+          0.12 * Math.sin(u * Math.PI) * Math.sin(v * Math.PI),
+        );
+      }
+    for (let j = 0; j < rows; j++)
+      for (let i = 0; i < cols; i++) {
+        const a = j * (cols + 1) + i,
+          b = a + 1,
+          c = a + cols + 1;
+        indices.push(a, c, b, b, c, c + 1);
+      }
+    const g = new BufferGeometry();
+    g.setAttribute('position', new Float32BufferAttribute(positions, 3));
+    g.setIndex(indices);
+    g.computeVertexNormals();
+    return g;
+  }, []);
+  useEffect(
+    () => () => {
+      hull.dispose();
+      sailGeometry.dispose();
+    },
+    [hull, sailGeometry],
+  );
   const boxes = useMemo(
     () =>
       cargo
@@ -114,7 +161,7 @@ function Vessel({ route }: { route: VesselRoute }) {
   );
   useFrame(() => {
     if (!ref.current) return;
-    const p = vesselAt(route, runtime.clock.activityTime);
+    const p = vesselAt(route, runtime.clock.activityTime, point);
     ref.current.position.set(p.x, Math.sin(runtime.clock.time * 0.7 + route.phase) * 0.018, p.z);
     ref.current.rotation.set(
       Math.sin(runtime.clock.time + route.phase) * 0.006,
@@ -125,10 +172,14 @@ function Vessel({ route }: { route: VesselRoute }) {
   return (
     <>
       <group ref={ref}>
-        <mesh geometry={hull} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.12, 0]}>
+        <mesh
+          geometry={hull}
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[0, cargo ? -0.4 : -0.12, 0]}
+        >
           <meshStandardMaterial
-            color={cargo ? '#475452' : '#e0ddd1'}
-            roughness={0.8}
+            color={cargo ? '#33454a' : '#e0ddd1'}
+            roughness={0.64}
             side={DoubleSide}
           />
         </mesh>
@@ -138,11 +189,21 @@ function Vessel({ route }: { route: VesselRoute }) {
         </mesh>
         {cargo ? (
           <>
-            <Instances items={boxes} color="#886753" />
+            <Instances items={boxes} color="#886753" material={materials.paint} shape="beveled" />
             <mesh position={[-length * 0.36, 0.85, 0]}>
               <boxGeometry args={[1.4, 1.6, width * 0.8]} />
               <meshStandardMaterial color="#e1d8bc" />
             </mesh>
+            <Instances
+              items={[-1, 1].flatMap((side) =>
+                Array.from({ length: 6 }, (_, i) => ({
+                  position: [-length * 0.36 + 0.5 - i * 0.2, 1.42, side * width * 0.405] as const,
+                  scale: [0.14, 0.16, 0.015] as const,
+                })),
+              )}
+              color="#344d58"
+              roughness={0.22}
+            />
             <mesh position={[-length * 0.4, 1.87, 0]}>
               <boxGeometry args={[0.35, 0.7, 0.3]} />
               <meshStandardMaterial color="#6e7770" />
@@ -154,9 +215,8 @@ function Vessel({ route }: { route: VesselRoute }) {
               <cylinderGeometry args={[0.014, 0.014, 2.1, 6]} />
               <meshStandardMaterial color="#a6aaa0" />
             </mesh>
-            <mesh position={[0.28, 1.2, 0]} rotation={[0, 0, -0.23]}>
-              <coneGeometry args={[0.48, 1.8, 3]} />
-              <meshStandardMaterial color="#f2ead9" roughness={0.9} />
+            <mesh geometry={sailGeometry}>
+              <meshStandardMaterial color="#f2ead9" roughness={0.98} side={DoubleSide} />
             </mesh>
           </>
         ) : (
@@ -169,6 +229,20 @@ function Vessel({ route }: { route: VesselRoute }) {
               <boxGeometry args={[length * 0.55, 0.16, width * 0.77]} />
               <meshStandardMaterial color="#344d56" />
             </mesh>
+            <Instances
+              items={[-1, 1].flatMap((side) =>
+                Array.from({ length: 10 }, (_, i) => ({
+                  position: [
+                    -length * 0.29 + i * length * 0.057,
+                    0.42,
+                    side * width * 0.375,
+                  ] as const,
+                  scale: [length * 0.042, 0.16, 0.012] as const,
+                })),
+              )}
+              color="#203b49"
+              roughness={0.18}
+            />
           </>
         )}
       </group>

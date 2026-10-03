@@ -290,7 +290,9 @@ export function Controls() {
                   <option value="balanced">Balanced</option>
                   <option value="high">High</option>
                 </select>
-                <p className="panel-note">Higher quality sharpens reflections and shadows.</p>
+                <p className="panel-note">
+                  Higher quality adds detail to materials, shorelines and reflections.
+                </p>
               </>
             ) : (
               <>

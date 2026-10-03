@@ -6,7 +6,7 @@ An interactive 3D exploration of the Golden Gate Bridge and San Francisco Bay, w
 
 ![Golden Gate in warm coastal light](docs/artifacts/hero-golden.png)
 
-Seven perspectives, three atmospheric presets, a shared simulation clock, reflective procedural water, instanced traffic, and deterministic coastal terrain. Built with Vite, React, strict TypeScript, Three.js, React Three Fiber, and Drei. Everything needed to render the scene is local; no backend, map service, API key, CDN font, or live traffic feed is required.
+Seven perspectives, three atmospheric presets, a shared simulation clock, reflective procedural water, instanced traffic, and deterministic coastal terrain. Local photogrammetric PBR materials, an analytical daylight sky, environment lighting, detailed tower joints, organic vegetation, residential facades and curved vessel hulls provide the updated graphics. Built with Vite, React, strict TypeScript, Three.js, React Three Fiber, and Drei. Everything needed to render the scene is local; no backend, map service, API key, CDN font, or live traffic feed is required.
 
 ## Run locally
 
@@ -64,4 +64,4 @@ Bridge spans, tower height, deck width, and cable diameter use Golden Gate Bridg
 
 Reflections use a separate bridge proxy at bounded resolution and exclude the city, foliage, vehicles, and ships. Spatial coastal fog uses low world-space layers plus distance haze. See [architecture](docs/ARCHITECTURE.md) and [visual review](docs/VISUAL_REVIEW.md) for the practical limits.
 
-Code: MIT © hostlife22. Natural Earth: public domain. Bridge alignment: © OpenStreetMap contributors, ODbL. Local DM Sans and Instrument Serif: SIL Open Font License 1.1. Full asset attribution and sources are in [THIRD_PARTY_LICENSES.md](docs/THIRD_PARTY_LICENSES.md).
+Code: MIT © hostlife22. Natural Earth: public domain. Bridge alignment: © OpenStreetMap contributors, ODbL. Poly Haven material maps: CC0. Local DM Sans and Instrument Serif: SIL Open Font License 1.1. Full asset attribution and sources are in [THIRD_PARTY_LICENSES.md](docs/THIRD_PARTY_LICENSES.md).

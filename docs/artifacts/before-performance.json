@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-03T11:33:44.056Z",
+  "date": "2026-10-03T10:52:01.350Z",
   "viewport": [
     1440,
     1000
@@ -13,50 +13,50 @@
     {
       "mode": "Hero / Golden Hour / Balanced",
       "frames": 90,
-      "medianMs": 16.59999999962747,
-      "p95Ms": 17.5,
-      "mainDrawCalls": 94,
-      "mainTriangles": 1252236
+      "medianMs": 16.600000001490116,
+      "p95Ms": 17.59999999962747,
+      "mainDrawCalls": 86,
+      "mainTriangles": 357201
     },
     {
       "mode": "Hero / Coastal Fog / Balanced",
       "frames": 90,
       "medianMs": 16.699999999254942,
-      "p95Ms": 17.5,
-      "mainDrawCalls": 94,
-      "mainTriangles": 1252236
+      "p95Ms": 17.59999999962747,
+      "mainDrawCalls": 86,
+      "mainTriangles": 357201
     },
     {
       "mode": "Panorama / Clear Day / Balanced",
       "frames": 90,
       "medianMs": 16.699999999254942,
-      "p95Ms": 17.5,
-      "mainDrawCalls": 98,
-      "mainTriangles": 1232814
+      "p95Ms": 17.40000000037253,
+      "mainDrawCalls": 90,
+      "mainTriangles": 345243
     },
     {
       "mode": "Waterline / Clear Day / Balanced",
       "frames": 90,
-      "medianMs": 16.59999999962747,
-      "p95Ms": 17.59999999962747,
-      "mainDrawCalls": 96,
-      "mainTriangles": 1282200
+      "medianMs": 16.700000001117587,
+      "p95Ms": 17.300000000745058,
+      "mainDrawCalls": 86,
+      "mainTriangles": 357253
     },
     {
       "mode": "Tower Detail / Clear Day / Balanced",
       "frames": 90,
-      "medianMs": 16.59999999962747,
-      "p95Ms": 17.699999999254942,
-      "mainDrawCalls": 88,
-      "mainTriangles": 1280262
+      "medianMs": 16.699999999254942,
+      "p95Ms": 17.40000000037253,
+      "mainDrawCalls": 77,
+      "mainTriangles": 353346
     },
     {
       "mode": "Waterline / Clear Day / High",
       "frames": 90,
       "medianMs": 16.699999999254942,
-      "p95Ms": 17.59999999962747,
-      "mainDrawCalls": 96,
-      "mainTriangles": 1630356
+      "p95Ms": 17.699999999254942,
+      "mainDrawCalls": 86,
+      "mainTriangles": 357253
     }
   ],
   "errors": [],

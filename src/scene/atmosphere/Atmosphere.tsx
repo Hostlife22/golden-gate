@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import {
-  BackSide,
   Color,
   DirectionalLight,
   DoubleSide,
@@ -9,9 +8,13 @@ import {
   Group,
   HemisphereLight,
   ShaderMaterial,
+  Scene,
+  PMREMGenerator,
 } from 'three';
 import { useObservatory } from '../../app/state';
 import { WEATHER } from '../../data/presets';
+import { Sky } from 'three/addons/objects/Sky.js';
+import type { WebGLRenderTarget } from 'three';
 import { seeded } from '../../simulation/math';
 export function Atmosphere() {
   const { runtime, settings } = useObservatory(),
@@ -35,23 +38,54 @@ export function Atmosphere() {
       scene.fog = null;
     };
   }, [scene, fog]);
-  const sky = useMemo(
-    () =>
-      new ShaderMaterial({
-        side: BackSide,
-        depthWrite: false,
-        uniforms: {
-          uSky: { value: new Color() },
-          uHaze: { value: new Color() },
-          uTime: { value: 0 },
-        },
-        vertexShader:
-          'varying vec3 vWorld; void main(){vWorld=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
-        fragmentShader: `uniform vec3 uSky,uHaze;uniform float uTime;varying vec3 vWorld;void main(){float y=normalize(vWorld).y;vec3 col=mix(uHaze,uSky,smoothstep(0.0,0.65,y));float cloud=sin(vWorld.x*0.001+uTime*0.003)*sin(vWorld.z*0.0009-uTime*0.002);col=mix(col,vec3(0.83,0.86,0.83),smoothstep(0.5,0.95,cloud)*0.10*smoothstep(0.04,0.22,y));gl_FragColor=vec4(col,1.0);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>}`,
-      }),
-    [],
+  const sky = useMemo(() => {
+    const dome = new Sky();
+    dome.scale.setScalar(3900);
+    dome.material.fragmentShader = dome.material.fragmentShader.replace(
+      'gl_FragColor = vec4( texColor, 1.0 );',
+      'gl_FragColor = vec4( texColor * 0.25, 1.0 );',
+    );
+    dome.renderOrder = -10;
+    dome.material.uniforms.rayleigh.value = 2.4;
+    dome.material.uniforms.mieCoefficient.value = 0.004;
+    dome.material.uniforms.cloudScale.value = 0.00012;
+    dome.material.uniforms.cloudSpeed.value = 0.000008;
+    dome.material.uniforms.cloudCoverage.value = 0.36;
+    dome.material.uniforms.cloudDensity.value = 0.32;
+    return dome;
+  }, []);
+  const environment = useMemo(() => {
+    const generator = new PMREMGenerator(gl),
+      source = new Scene(),
+      dome = new Sky();
+    dome.scale.setScalar(100);
+    dome.material.fragmentShader = dome.material.fragmentShader.replace(
+      'gl_FragColor = vec4( texColor, 1.0 );',
+      'gl_FragColor = vec4( texColor * 0.25, 1.0 );',
+    );
+    dome.material.uniforms.showSunDisc.value = 0;
+    source.add(dome);
+    return {
+      generator,
+      source,
+      dome,
+      target: null as WebGLRenderTarget | null,
+      elapsed: 10,
+      weather: '',
+    };
+  }, [gl]);
+  useEffect(
+    () => () => {
+      scene.environment = null;
+      environment.target?.dispose();
+      environment.generator.dispose();
+      environment.dome.material.dispose();
+      environment.dome.geometry.dispose();
+      sky.material.dispose();
+      sky.geometry.dispose();
+    },
+    [scene, environment, sky],
   );
-  useEffect(() => () => sky.dispose(), [sky]);
   useFrame((_, delta) => {
     const w = runtime.weather,
       alpha = 1 - Math.exp(-Math.min(delta, 1) * 2.0);
@@ -74,11 +108,45 @@ export function Atmosphere() {
     }
     if (ambient.current) {
       ambient.current.color.copy(w.sky);
-      ambient.current.intensity = w.ambient;
+      ambient.current.intensity = w.ambient * 0.58;
     }
-    sky.uniforms.uSky.value.copy(w.sky);
-    sky.uniforms.uHaze.value.copy(w.haze);
-    sky.uniforms.uTime.value = runtime.clock.time;
+    const u = sky.material.uniforms;
+    u.sunPosition.value.copy(w.sunPosition);
+    u.time.value = runtime.clock.time;
+    const turbulence = settings.weather === 'fog' ? 16 : settings.weather === 'golden' ? 5.5 : 3.3;
+    u.turbidity.value += (turbulence - u.turbidity.value) * alpha;
+    u.cloudCoverage.value +=
+      ((settings.weather === 'fog' ? 0.74 : 0.36) - u.cloudCoverage.value) * alpha;
+    scene.environmentIntensity = w.ambient * 0.12;
+    environment.elapsed += delta;
+    const settling = Math.abs(w.sunPosition.y - target.sunPosition[1]) < 2;
+    if (
+      !environment.target ||
+      (environment.weather !== settings.weather && settling && environment.elapsed > 1.5)
+    ) {
+      for (const name of [
+        'sunPosition',
+        'turbidity',
+        'rayleigh',
+        'mieCoefficient',
+        'cloudCoverage',
+        'cloudScale',
+        'cloudDensity',
+      ]) {
+        const value = u[name].value;
+        if (environment.dome.material.uniforms[name].value?.copy)
+          environment.dome.material.uniforms[name].value.copy(value);
+        else environment.dome.material.uniforms[name].value = value;
+      }
+      const next = environment.generator.fromScene(environment.source, 0.04, 0.1, 220, {
+        size: 128,
+      });
+      scene.environment = next.texture;
+      environment.target?.dispose();
+      environment.target = next;
+      environment.elapsed = 0;
+      environment.weather = settings.weather;
+    }
   }, -90);
   return (
     <>
@@ -99,9 +167,7 @@ export function Atmosphere() {
         shadow-bias={-0.0002}
         shadow-normalBias={0.08}
       />
-      <mesh material={sky} renderOrder={-10}>
-        <sphereGeometry args={[3900, 32, 16]} />
-      </mesh>
+      <primitive object={sky} dispose={null} />
       <CoastalFog />
     </>
   );
