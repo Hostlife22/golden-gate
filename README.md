@@ -2,7 +2,7 @@
 
 An interactive 3D exploration of the Golden Gate Bridge and San Francisco Bay, with animated water, traffic, boats, and coastal fog.
 
-[Open the observatory](https://hostlife22.github.io/js/) · [Reference study](docs/REFERENCE_STUDY.md) · [Validation](docs/VALIDATION.md) · [Visual review](docs/VISUAL_REVIEW.md)
+[Open the observatory](https://hostlife22.github.io/golden-gate/) · [Reference study](docs/REFERENCE_STUDY.md) · [Validation](docs/VALIDATION.md) · [Visual review](docs/VISUAL_REVIEW.md)
 
 ![Golden Gate in warm coastal light](docs/artifacts/hero-golden.png)
 
@@ -24,7 +24,7 @@ npm run build
 npm run preview
 ```
 
-Open `http://127.0.0.1:4173/js/`. The `/js/` base matches the actual GitHub repository, `Hostlife22/js`, whose default branch is `main`.
+Open `http://127.0.0.1:4173/golden-gate/`. The `/golden-gate/` base matches the actual GitHub repository, `Hostlife22/golden-gate`, whose default branch is `main`.
 
 ## Explore
 

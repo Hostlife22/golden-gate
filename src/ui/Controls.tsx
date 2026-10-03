@@ -343,7 +343,11 @@ export function Controls() {
                   >
                     © OpenStreetMap contributors ↗
                   </a>
-                  <a href="https://github.com/Hostlife22/js" target="_blank" rel="noreferrer">
+                  <a
+                    href="https://github.com/Hostlife22/golden-gate"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Source & study ↗
                   </a>
                 </div>

@@ -1,6 +1,6 @@
 # Validation
 
-Date: 2026-10-03. Checks run against the static production build at `/js/`, not just Vite development. Detailed visual observations are in [VISUAL_REVIEW.md](VISUAL_REVIEW.md).
+Date: 2026-10-03. Checks run against the static production build at `/golden-gate/`, not just Vite development. Detailed visual observations are in [VISUAL_REVIEW.md](VISUAL_REVIEW.md).
 
 ## Local checks
 
@@ -11,7 +11,7 @@ Date: 2026-10-03. Checks run against the static production build at `/js/`, not 
 | Prettier                        | `npm run format:check`                                                                                   |
 | Geometry and simulation         | 7 Vitest tests pass                                                                                      |
 | Production browser behavior     | 6 Playwright scenarios pass; Chromium with ANGLE Metal on macOS                                          |
-| Static production bundle        | `npm run build`; relative asset loading respects `/js/`                                                  |
+| Static production bundle        | `npm run build`; relative asset loading respects `/golden-gate/`                                         |
 | Combined fast check             | `npm run check`: format → lint → types → unit tests → production build; excludes E2E                     |
 | Browser errors / missing assets | Screenshot capture records `errors: []`, `missing: []` in [performance.json](artifacts/performance.json) |
 
@@ -42,7 +42,7 @@ An initial Chromium launch fell back to software Vulkan SwiftShader and produced
 
 ## CI and deployment
 
-The actual repository is [Hostlife22/js](https://github.com/Hostlife22/js), default branch `main`, with existing workflow-based GitHub Pages enabled. `base: '/js/'` is applied to production only. Fast CI runs on push/PR. E2E has a separate workflow triggered only by `workflow_dispatch`. The Pages workflow listens for successful CI on a push to `main`, checks out `workflow_run.head_sha`, builds that exact revision, and deploys the static artifact.
+The actual repository is [Hostlife22/golden-gate](https://github.com/Hostlife22/golden-gate), default branch `main`, with existing workflow-based GitHub Pages enabled. `base: '/golden-gate/'` is applied to production only. Fast CI runs on push/PR. E2E has a separate workflow triggered only by `workflow_dispatch`. The Pages workflow listens for successful CI on a push to `main`, checks out `workflow_run.head_sha`, builds that exact revision, and deploys the static artifact.
 
 Production deployment verification is recorded below after publication. No backend, API key, externally fetched runtime map, or CDN font is needed.
 

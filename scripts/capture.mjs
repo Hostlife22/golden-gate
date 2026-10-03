@@ -1,6 +1,6 @@
 import { chromium } from '@playwright/test';
 import { writeFile, mkdir } from 'node:fs/promises';
-const base = process.env.OBSERVATORY_URL ?? 'http://127.0.0.1:4173/js/';
+const base = process.env.OBSERVATORY_URL ?? 'http://127.0.0.1:4173/golden-gate/';
 const browser = await chromium.launch({
   headless: true,
   args: process.platform === 'darwin' ? ['--use-angle=metal', '--enable-gpu'] : [],
