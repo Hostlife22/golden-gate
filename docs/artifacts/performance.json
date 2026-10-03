@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-03T10:52:01.350Z",
+  "viewport": [
+    1440,
+    1000
+  ],
+  "dpr": 1,
+  "gpu": {
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 5300M, Unspecified Version)",
+    "vendor": "Google Inc. (AMD)"
+  },
+  "performance": [
+    {
+      "mode": "Hero / Golden Hour / Balanced",
+      "frames": 90,
+      "medianMs": 16.600000001490116,
+      "p95Ms": 17.59999999962747,
+      "mainDrawCalls": 86,
+      "mainTriangles": 357201
+    },
+    {
+      "mode": "Hero / Coastal Fog / Balanced",
+      "frames": 90,
+      "medianMs": 16.699999999254942,
+      "p95Ms": 17.59999999962747,
+      "mainDrawCalls": 86,
+      "mainTriangles": 357201
+    },
+    {
+      "mode": "Panorama / Clear Day / Balanced",
+      "frames": 90,
+      "medianMs": 16.699999999254942,
+      "p95Ms": 17.40000000037253,
+      "mainDrawCalls": 90,
+      "mainTriangles": 345243
+    },
+    {
+      "mode": "Waterline / Clear Day / Balanced",
+      "frames": 90,
+      "medianMs": 16.700000001117587,
+      "p95Ms": 17.300000000745058,
+      "mainDrawCalls": 86,
+      "mainTriangles": 357253
+    },
+    {
+      "mode": "Tower Detail / Clear Day / Balanced",
+      "frames": 90,
+      "medianMs": 16.699999999254942,
+      "p95Ms": 17.40000000037253,
+      "mainDrawCalls": 77,
+      "mainTriangles": 353346
+    },
+    {
+      "mode": "Waterline / Clear Day / High",
+      "frames": 90,
+      "medianMs": 16.699999999254942,
+      "p95Ms": 17.699999999254942,
+      "mainDrawCalls": 86,
+      "mainTriangles": 357253
+    }
+  ],
+  "errors": [],
+  "missing": []
+}
