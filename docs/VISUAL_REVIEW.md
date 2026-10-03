@@ -20,7 +20,7 @@ Date: 2026-10-03. Screenshots were captured from the production build, opened, a
 
 [Motion recording](artifacts/observatory-motion.webm) shows the shared live scene, Hero → Waterline → Tower Detail flights, a weather transition, pause/resume, passing traffic/vessels, and evolving water/wakes. The recording was inspected using [sampled video frames](artifacts/motion-review.jpg); no prerecorded imagery is substituted for the application scene.
 
-The [deployed Hero capture](artifacts/deployed-hero.png) was also opened and inspected after the repository rename and successful publication at `/golden-gate/`; it confirms the same scene and controls load from the real public URL. [Deployment evidence](artifacts/deployment.json) records the checked revision and resource results.
+The [deployed Hero capture](artifacts/deployed-hero.png) was also opened and inspected after the graphics refinement and successful publication at `/golden-gate/`; it confirms the same scene and controls load from the real public URL. [Deployment evidence](artifacts/deployment.json) records the checked revision and resource results.
 
 ## Corrections made during review
 

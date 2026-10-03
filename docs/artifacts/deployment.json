@@ -1,9 +1,9 @@
 {
-  "date": "2026-10-03T11:04:01.459Z",
+  "date": "2026-10-03T11:38:41.170Z",
   "url": "https://hostlife22.github.io/golden-gate/",
-  "sourceRevision": "e6b0ccc671208ba4180db779e8a32cd358f3b2f6",
-  "ci": "https://github.com/Hostlife22/golden-gate/actions/runs/37118246587",
-  "deployment": "https://github.com/Hostlife22/golden-gate/actions/runs/37118398327",
+  "sourceRevision": "f8ee9515c829b8a66cd40bc79390225ecf469e7e",
+  "ci": "https://github.com/Hostlife22/golden-gate/actions/runs/37120230000",
+  "deployment": "https://github.com/Hostlife22/golden-gate/actions/runs/37120259363",
   "httpStatus": 200,
   "browser": "153.0.8010.12",
   "viewport": {
@@ -15,11 +15,12 @@
     "dmSans": true,
     "instrumentSerif": true
   },
-  "expectedEntry": "/golden-gate/assets/index--GG0xXrB.js",
+  "expectedEntry": "/golden-gate/assets/index-C53Io3UV.js",
   "checks": [
     "public URL without query HTTP 200 and current entry",
     "loaded actual production entry and lazy scene",
     "both local font families ready",
+    "all 12 local PBR material maps loaded HTTP 200",
     "shared visual/activity clocks frozen on pause",
     "weather changes while paused",
     "animation resumes",
@@ -34,10 +35,6 @@
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/index--GG0xXrB.js",
-      "status": 200
-    },
-    {
       "url": "https://hostlife22.github.io/golden-gate/assets/index-7OjXFmrP.css",
       "status": 200
     },
@@ -46,7 +43,11 @@
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/three-PsC7QK0f.js",
+      "url": "https://hostlife22.github.io/golden-gate/assets/index-C53Io3UV.js",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/three-CADfCKZs.js",
       "status": 200
     },
     {
@@ -62,7 +63,55 @@
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/Scene-DX7-fHQm.js",
+      "url": "https://hostlife22.github.io/golden-gate/assets/Scene-DVP71_fj.js",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/asphalt_02_nor_gl.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/asphalt_02_rough.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/aerial_grass_rock_nor_gl.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/asphalt_02_diff.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/concrete_layers_02_nor_gl.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/aerial_grass_rock_rough.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/concrete_layers_02_rough.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/aerial_grass_rock_diff.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/rocky_terrain_rough.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/concrete_layers_02_diff.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/rocky_terrain_diff.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/rocky_terrain_nor_gl.webp",
       "status": 200
     }
   ]

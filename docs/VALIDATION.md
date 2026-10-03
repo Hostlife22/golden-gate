@@ -48,9 +48,9 @@ The actual repository is [Hostlife22/golden-gate](https://github.com/Hostlife22/
 
 The repository was renamed by its owner from `js` to `golden-gate` during publication. The remote, Vite production base, preview/E2E URLs, capture script, package metadata, source link, and documentation were updated together. All seven unit tests and six browser scenarios passed again with the new base.
 
-Publication before the graphics refinement: `e6b0ccc671208ba4180db779e8a32cd358f3b2f6`. [Ubuntu CI passed](https://github.com/Hostlife22/golden-gate/actions/runs/37118246587), then [GitHub Pages deployed that revision](https://github.com/Hostlife22/golden-gate/actions/runs/37118398327).
+Published graphics revision: `f8ee9515c829b8a66cd40bc79390225ecf469e7e`. [Ubuntu CI passed](https://github.com/Hostlife22/golden-gate/actions/runs/37120230000), then [GitHub Pages deployed that revision](https://github.com/Hostlife22/golden-gate/actions/runs/37120259363).
 
-Before the graphics refinement, on 2026-10-03 at 11:04 UTC, Playwright Chromium checked the real [public URL](https://hostlife22.github.io/golden-gate/): HTTP 200, the current production entry/lazy scene, local font readiness, and the favicon. Both shared clocks remained frozen during pause, weather changed while paused, and animation resumed. There were zero browser console errors, missing resources, or failed requests. The URL without diagnostic query parameters also returned HTTP 200 and the current entry. Evidence: [deployment.json](artifacts/deployment.json) and [deployed Hero screenshot](artifacts/deployed-hero.png).
+On 2026-10-03 at 11:38 UTC, Playwright Chromium checked the real [public URL](https://hostlife22.github.io/golden-gate/): HTTP 200, the current production entry/lazy scene, all 12 local PBR texture maps, local font readiness, and the favicon. Both shared clocks remained frozen during pause, weather changed while paused, and animation resumed. There were zero browser console errors, missing resources, or failed requests. The URL without diagnostic query parameters also returned HTTP 200 and the current entry. Evidence: [deployment.json](artifacts/deployment.json) and [deployed Hero screenshot](artifacts/deployed-hero.png).
 
 No backend, API key, externally fetched runtime map, or CDN font is needed.
 
