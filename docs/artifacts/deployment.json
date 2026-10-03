@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-03T11:04:01.459Z",
+  "url": "https://hostlife22.github.io/golden-gate/",
+  "sourceRevision": "e6b0ccc671208ba4180db779e8a32cd358f3b2f6",
+  "ci": "https://github.com/Hostlife22/golden-gate/actions/runs/37118246587",
+  "deployment": "https://github.com/Hostlife22/golden-gate/actions/runs/37118398327",
+  "httpStatus": 200,
+  "browser": "153.0.8010.12",
+  "viewport": {
+    "width": 1440,
+    "height": 1000,
+    "dpr": 1
+  },
+  "fonts": {
+    "dmSans": true,
+    "instrumentSerif": true
+  },
+  "expectedEntry": "/golden-gate/assets/index--GG0xXrB.js",
+  "checks": [
+    "public URL without query HTTP 200 and current entry",
+    "loaded actual production entry and lazy scene",
+    "both local font families ready",
+    "shared visual/activity clocks frozen on pause",
+    "weather changes while paused",
+    "animation resumes",
+    "local favicon HTTP 200"
+  ],
+  "consoleErrors": [],
+  "missingResources": [],
+  "failedRequests": [],
+  "resources": [
+    {
+      "url": "https://hostlife22.github.io/golden-gate/?diagnostics=1",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/index--GG0xXrB.js",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/index-7OjXFmrP.css",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/rolldown-runtime-hePW80VL.js",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/three-PsC7QK0f.js",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/dm-sans-medium-B9HHJjqV.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/instrument-serif-DnYpCC2O.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/dm-sans-regular-CW0RaeGs.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/Scene-DX7-fHQm.js",
+      "status": 200
+    }
+  ]
+}

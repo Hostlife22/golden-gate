@@ -44,7 +44,13 @@ An initial Chromium launch fell back to software Vulkan SwiftShader and produced
 
 The actual repository is [Hostlife22/golden-gate](https://github.com/Hostlife22/golden-gate), default branch `main`, with existing workflow-based GitHub Pages enabled. `base: '/golden-gate/'` is applied to production only. Fast CI runs on push/PR. E2E has a separate workflow triggered only by `workflow_dispatch`. The Pages workflow listens for successful CI on a push to `main`, checks out `workflow_run.head_sha`, builds that exact revision, and deploys the static artifact.
 
-Production deployment verification is recorded below after publication. No backend, API key, externally fetched runtime map, or CDN font is needed.
+The repository was renamed by its owner from `js` to `golden-gate` during publication. The remote, Vite production base, preview/E2E URLs, capture script, package metadata, source link, and documentation were updated together. All seven unit tests and six browser scenarios passed again with the new base.
+
+Published application revision: `e6b0ccc671208ba4180db779e8a32cd358f3b2f6`. [Ubuntu CI passed](https://github.com/Hostlife22/golden-gate/actions/runs/37118246587), then [GitHub Pages deployed that revision](https://github.com/Hostlife22/golden-gate/actions/runs/37118398327).
+
+On 2026-10-03 at 11:04 UTC, Playwright Chromium checked the real [public URL](https://hostlife22.github.io/golden-gate/): HTTP 200, the current production entry/lazy scene, local font readiness, and the favicon. Both shared clocks remained frozen during pause, weather changed while paused, and animation resumed. There were zero browser console errors, missing resources, or failed requests. The URL without diagnostic query parameters also returned HTTP 200 and the current entry. Evidence: [deployment.json](artifacts/deployment.json) and [deployed Hero screenshot](artifacts/deployed-hero.png).
+
+No backend, API key, externally fetched runtime map, or CDN font is needed.
 
 ## Practical limitations
 
