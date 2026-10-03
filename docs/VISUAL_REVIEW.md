@@ -20,7 +20,7 @@ Date: 2026-10-03. Screenshots were captured from the production build, opened, a
 
 [Motion recording](artifacts/observatory-motion.webm) shows the shared live scene, Hero → Waterline → Tower Detail flights, a weather transition, pause/resume, passing traffic/vessels, and evolving water/wakes. The recording was inspected using [sampled video frames](artifacts/motion-review.jpg); no prerecorded imagery is substituted for the application scene.
 
-The [deployed Hero capture](artifacts/deployed-hero.png) was also opened and inspected after the graphics refinement and successful publication at `/golden-gate/`; it confirms the same scene and controls load from the real public URL. [Deployment evidence](artifacts/deployment.json) records the checked revision and resource results.
+The [deployed Hero capture](artifacts/deployed-hero.png) was also opened and inspected after the graphics refinement, subsequent decomposition and successful publication at `/golden-gate/`; it confirms the same scene and controls load from the real public URL. [Deployment evidence](artifacts/deployment.json) records the checked revision and resource results.
 
 ## Corrections made during review
 
@@ -49,6 +49,10 @@ The initial plain-material scene is preserved in [before Hero](artifacts/before-
 - Added rounded car bodies, glass canopies and wheels; curved extruded ship hulls, container edges, cabin glazing and a bowed cloth sail.
 - Replaced the flat sky gradient with analytical daylight/cloud scattering, generated environment lighting and matching sky reflection on water.
 - Fixed visible texture repetition, an overexposed first sky pass, distant ripple aliasing and overly white tiled distant city blocks found in intermediate captures. Reduced distant normal detail and used a cheaper dominant projection in Balanced after an intermediate frame-time regression.
+
+## Decomposition review
+
+Nine frozen reduced-motion frames compare the original graphics revision with the decomposed implementation: all three weather presets, Panorama, Waterline, Tower Detail, High quality, portrait Hero and portrait settings. The largest RGB channel difference is 2/255; no pixel exceeds the 10/255 comparison threshold. Neither capture run reported browser errors. The geometry, materials and layout remain visually equivalent; small settling-time differences in environment lighting account for the residual color differences. The reference PNGs were inspected locally and the numerical evidence is saved in [refactor-visual-comparison.json](artifacts/refactor-visual-comparison.json). The live deployment was checked separately after publication.
 
 ## Remaining visual approximations
 

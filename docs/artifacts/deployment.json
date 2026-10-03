@@ -1,9 +1,9 @@
 {
-  "date": "2026-10-03T11:38:41.170Z",
+  "date": "2026-10-03T12:05:19.034Z",
   "url": "https://hostlife22.github.io/golden-gate/",
-  "sourceRevision": "f8ee9515c829b8a66cd40bc79390225ecf469e7e",
-  "ci": "https://github.com/Hostlife22/golden-gate/actions/runs/37120230000",
-  "deployment": "https://github.com/Hostlife22/golden-gate/actions/runs/37120259363",
+  "sourceRevision": "e0a29703678859e525e37f93bf8f9bd22fcbaded",
+  "ci": "https://github.com/Hostlife22/golden-gate/actions/runs/37121648049",
+  "deployment": "https://github.com/Hostlife22/golden-gate/actions/runs/37121675917",
   "httpStatus": 200,
   "browser": "153.0.8010.12",
   "viewport": {
@@ -15,7 +15,7 @@
     "dmSans": true,
     "instrumentSerif": true
   },
-  "expectedEntry": "/golden-gate/assets/index-C53Io3UV.js",
+  "expectedEntry": "/golden-gate/assets/index-C8ygYeWh.js",
   "checks": [
     "public URL without query HTTP 200 and current entry",
     "loaded actual production entry and lazy scene",
@@ -35,19 +35,19 @@
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/index-7OjXFmrP.css",
-      "status": 200
-    },
-    {
       "url": "https://hostlife22.github.io/golden-gate/assets/rolldown-runtime-hePW80VL.js",
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/index-C53Io3UV.js",
+      "url": "https://hostlife22.github.io/golden-gate/assets/index-7OjXFmrP.css",
       "status": 200
     },
     {
       "url": "https://hostlife22.github.io/golden-gate/assets/three-CADfCKZs.js",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/index-C8ygYeWh.js",
       "status": 200
     },
     {
@@ -63,11 +63,15 @@
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/Scene-DVP71_fj.js",
+      "url": "https://hostlife22.github.io/golden-gate/assets/Scene-WE8xXgQj.js",
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/materials/asphalt_02_nor_gl.webp",
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/aerial_grass_rock_diff.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/rocky_terrain_nor_gl.webp",
       "status": 200
     },
     {
@@ -79,15 +83,7 @@
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/materials/asphalt_02_diff.webp",
-      "status": 200
-    },
-    {
-      "url": "https://hostlife22.github.io/golden-gate/assets/materials/concrete_layers_02_nor_gl.webp",
-      "status": 200
-    },
-    {
-      "url": "https://hostlife22.github.io/golden-gate/assets/materials/aerial_grass_rock_rough.webp",
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/concrete_layers_02_diff.webp",
       "status": 200
     },
     {
@@ -95,15 +91,11 @@
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/materials/aerial_grass_rock_diff.webp",
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/concrete_layers_02_nor_gl.webp",
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/materials/rocky_terrain_rough.webp",
-      "status": 200
-    },
-    {
-      "url": "https://hostlife22.github.io/golden-gate/assets/materials/concrete_layers_02_diff.webp",
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/asphalt_02_diff.webp",
       "status": 200
     },
     {
@@ -111,7 +103,15 @@
       "status": 200
     },
     {
-      "url": "https://hostlife22.github.io/golden-gate/assets/materials/rocky_terrain_nor_gl.webp",
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/aerial_grass_rock_rough.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/asphalt_02_nor_gl.webp",
+      "status": 200
+    },
+    {
+      "url": "https://hostlife22.github.io/golden-gate/assets/materials/rocky_terrain_rough.webp",
       "status": 200
     }
   ]
