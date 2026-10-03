@@ -3,9 +3,10 @@ import { useFrame } from '@react-three/fiber';
 import { Color, InstancedMesh, Object3D } from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { useEffect } from 'react';
-import { useObservatory } from '../../app/state';
+import { useObservatory } from '../../app/context';
 import { BRIDGE_ANGLE } from '../../data/bridge';
 import { VEHICLE_COUNT, vehicleAt } from '../../simulation/routes';
+
 export function Traffic() {
   const { runtime } = useObservatory(),
     body = useRef<InstancedMesh>(null),

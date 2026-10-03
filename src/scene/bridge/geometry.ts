@@ -3,6 +3,7 @@ import { BRIDGE, ANCHOR } from '../../data/bridge';
 import { cableHeight, deckHeight } from '../../simulation/math';
 import type { Instance } from '../Instances';
 import type { Point3 } from '../../data/geography';
+
 export function beam(a: Point3, b: Point3, thickness: number): Instance {
   const dx = b[0] - a[0],
     dy = b[1] - a[1],
@@ -13,12 +14,14 @@ export function beam(a: Point3, b: Point3, thickness: number): Instance {
     rotation: [Math.atan2(dz, dy), 0, -Math.atan2(dx, Math.hypot(dy, dz))],
   };
 }
+
 export function cablePoints(x: number, z0: number, z1: number, steps: number) {
   return Array.from({ length: steps + 1 }, (_, i) => {
     const z = z0 + ((z1 - z0) * i) / steps;
     return new Vector3(x, cableHeight(z), z);
   });
 }
+
 export function suspenderData(): Instance[] {
   const data: Instance[] = [];
   for (let z = -ANCHOR + BRIDGE.suspenderSpacing; z < ANCHOR; z += BRIDGE.suspenderSpacing) {

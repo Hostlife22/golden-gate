@@ -1,5 +1,6 @@
 import { DataTexture, LinearFilter, RedFormat, UnsignedByteType, Vector4 } from 'three';
 import { isLand, shoreDistance } from '../terrain/height';
+
 /** A shoreline proximity field; this is not measured bathymetry. */
 export function coastalField() {
   const size = 256,

@@ -9,8 +9,8 @@ Date: 2026-10-03. Checks run against the static production build at `/golden-gat
 | Strict TypeScript               | `npm run typecheck`; no `any` or suppressed type errors in project sources                               |
 | ESLint                          | `npm run lint`                                                                                           |
 | Prettier                        | `npm run format:check`                                                                                   |
-| Geometry and simulation         | 7 Vitest tests pass                                                                                      |
-| Production browser behavior     | 6 Playwright scenarios pass; Chromium with ANGLE Metal on macOS                                          |
+| Geometry and simulation         | 12 Vitest tests pass                                                                                     |
+| Production browser behavior     | 7 Playwright scenarios pass; Chromium with ANGLE Metal on macOS                                          |
 | Static production bundle        | `npm run build`; relative asset loading respects `/golden-gate/`                                         |
 | Combined fast check             | `npm run check`: format → lint → types → unit tests → production build; excludes E2E                     |
 | Browser errors / missing assets | Screenshot capture records `errors: []`, `missing: []` in [performance.json](artifacts/performance.json) |
@@ -21,7 +21,15 @@ Playwright covers all preset flights, positive camera height, pause and resume, 
 
 Desktop viewport for functional tests: 1000×720. Portrait: 390×844. Short desktop: 1280×500. Captures additionally use 1440×1000 and contain Hero under all three weather modes, Panorama, Waterline, Tower Detail, both shore views, mobile controls, mobile settings, and the short window.
 
+## Refactor validation
+
+The decomposition preserves graphical assets, dimensions, deterministic seeds and animation formulas. Five additional unit tests cover texture/material ownership and disposal, shader callback preservation on tint clones, renderer state restoration when a reflection render fails, interrupted weather transitions and bounded in-place interpolation. The seven existing geometry/route/clock tests remain in place.
+
+All seven production browser scenarios pass after decomposition, including a new check of focus cycling/restoration, Escape/backdrop dismissal and High-quality persistence across reopening the extracted settings/about dialogs. Frozen reduced-motion reference captures at 1440×1000 / DPR 1 and 390×844 compare Hero under each weather preset, Panorama, Waterline, Tower Detail, High quality and mobile settings. These captures isolate structural/material changes from moving traffic and waves. Across nine captures the maximum RGB channel difference was 2/255; no pixel exceeded a 10/255 channel threshold. Both capture runs recorded zero browser errors. Settled environment capture timing can introduce small lighting differences between runs. Raw comparison: [refactor-visual-comparison.json](artifacts/refactor-visual-comparison.json). Reference PNGs were inspected locally; the existing graphical evidence remains applicable.
+
 ## Performance method
+
+The measurements below were recorded for the preceding graphics revision before decomposition. The refactor was checked for functional and visual equivalence; this table is not presented as a fresh frame-time benchmark of the refactored code.
 
 Machine: MacBook Pro, Intel Core i7-9750H @ 2.60 GHz, macOS/Darwin 25.6.0, AMD Radeon Pro 5300M as reported by `WEBGL_debug_renderer_info`. Browser: Playwright Chromium, headless, `--use-angle=metal --enable-gpu`. The high-performance context selects the Radeon GPU; a separate capability probe also found Intel UHD Graphics 630 available.
 

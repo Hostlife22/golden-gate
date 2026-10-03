@@ -1,5 +1,6 @@
 import { IcosahedronGeometry, Vector3 } from 'three';
 import { mergeGeometries, mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
+
 export function rockGeometry() {
   const geometry = new IcosahedronGeometry(1, 1);
   const p = geometry.attributes.position;
@@ -13,6 +14,7 @@ export function rockGeometry() {
   geometry.computeVertexNormals();
   return geometry;
 }
+
 export function crownGeometry() {
   const lobes = [
     [0, 0.22, 0, 0.85],

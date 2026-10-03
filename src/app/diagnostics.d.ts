@@ -15,6 +15,7 @@ export interface Snapshot {
     triangles: number;
   };
 }
+
 declare global {
   interface Window {
     __observatory?: () => Snapshot;

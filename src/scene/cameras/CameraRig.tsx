@@ -1,12 +1,14 @@
+import { FRAME_PRIORITY } from '../framePriorities';
 import { useEffect, useMemo, useRef } from 'react';
 import { OrbitControls } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { PerspectiveCamera, Vector3 } from 'three';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
-import { useObservatory } from '../../app/state';
-import { CAMERAS } from '../../data/presets';
+import { useObservatory } from '../../app/context';
+import { getCameraPreset } from '../../data/presets';
 import { bridgeToWorld, smoothstep, worldToBridge } from '../../simulation/math';
 import { terrainHeight } from '../terrain/height';
+
 interface Flight {
   elapsed: number;
   duration: number;
@@ -17,6 +19,7 @@ interface Flight {
   fov: number;
   endFov: number;
 }
+
 export function CameraRig() {
   const { settings, runtime, update } = useObservatory(),
     { camera, gl, size } = useThree(),
@@ -30,7 +33,7 @@ export function CameraRig() {
       runtime.cameraFlying = false;
       return;
     }
-    const p = CAMERAS.find((c) => c.id === settings.camera)!;
+    const p = getCameraPreset(settings.camera);
     if (!(camera instanceof PerspectiveCamera) || !controls.current) return;
     const duration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0.01 : 2.5;
     flight.current = {
@@ -87,7 +90,7 @@ export function CameraRig() {
     const compass = document.getElementById('compass-needle');
     if (compass)
       compass.style.transform = `rotate(${(Math.atan2(deltaPosition.x, deltaPosition.z) * 180) / Math.PI}deg)`;
-  }, -10);
+  }, FRAME_PRIORITY.camera);
   return (
     <OrbitControls
       ref={controls}

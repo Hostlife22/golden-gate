@@ -4,12 +4,23 @@ import type { Material } from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { crownGeometry, rockGeometry } from './organicGeometry';
 import type { Point3 } from '../data/geography';
+
 export interface Instance {
   position: Point3;
   scale: Point3;
   rotation?: Point3;
   color?: string;
 }
+
+interface InstancesProps {
+  items: Instance[];
+  color: string;
+  shape?: 'box' | 'cylinder' | 'cone' | 'rock' | 'foliage' | 'beveled' | 'sphere';
+  roughness?: number;
+  castShadow?: boolean;
+  material?: Material;
+}
+
 export function Instances({
   items,
   color,
@@ -17,14 +28,7 @@ export function Instances({
   roughness = 0.85,
   castShadow = false,
   material,
-}: {
-  items: Instance[];
-  color: string;
-  shape?: 'box' | 'cylinder' | 'cone' | 'rock' | 'foliage' | 'beveled' | 'sphere';
-  roughness?: number;
-  castShadow?: boolean;
-  material?: Material;
-}) {
+}: InstancesProps) {
   const ref = useRef<InstancedMesh>(null);
   const organic = useMemo(
     () =>

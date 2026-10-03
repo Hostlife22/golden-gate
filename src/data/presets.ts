@@ -1,6 +1,9 @@
 import type { Point3 } from './geography';
+
 export type WeatherId = 'clear' | 'golden' | 'fog';
+
 export type CameraId = 'hero' | 'panorama' | 'north' | 'south' | 'water' | 'tower' | 'free';
+
 export interface WeatherPreset {
   name: string;
   caption: string;
@@ -15,6 +18,16 @@ export interface WeatherPreset {
   fog: number;
   lowFog: number;
 }
+
+export interface CameraPreset {
+  id: CameraId;
+  name: string;
+  description: string;
+  position: Point3;
+  target: Point3;
+  fov: number;
+}
+
 export const WEATHER: Record<WeatherId, WeatherPreset> = {
   clear: {
     name: 'Clear Day',
@@ -59,14 +72,7 @@ export const WEATHER: Record<WeatherId, WeatherPreset> = {
     lowFog: 0.9,
   },
 };
-export interface CameraPreset {
-  id: CameraId;
-  name: string;
-  description: string;
-  position: Point3;
-  target: Point3;
-  fov: number;
-}
+
 export const CAMERAS: CameraPreset[] = [
   {
     id: 'hero',
@@ -125,3 +131,9 @@ export const CAMERAS: CameraPreset[] = [
     fov: 43,
   },
 ];
+
+export function getCameraPreset(id: CameraId): CameraPreset {
+  const preset = CAMERAS.find((camera) => camera.id === id);
+  if (!preset) throw new Error(`Unknown camera preset: ${id}`);
+  return preset;
+}

@@ -9,6 +9,7 @@ import {
 } from 'three';
 import { ANCHOR, BRIDGE, BRIDGE_ANGLE, HALF_SPAN, PALETTE } from '../../data/bridge';
 import { cablePoints } from '../bridge/geometry';
+
 /** A dedicated, bounded reflection scene: no second city/vegetation render. */
 export function reflectionScene() {
   const scene = new Scene(),

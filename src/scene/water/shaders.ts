@@ -15,6 +15,7 @@ export const waterVertex = /* glsl */ `
     #include <fog_vertex>
   }
 `;
+
 export const waterFragment = /* glsl */ `
   uniform float uTime;
   uniform vec3 uWater, uSky, uSun, uSunDirection;

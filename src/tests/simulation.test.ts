@@ -13,6 +13,7 @@ import {
   worldToBridge,
 } from '../simulation/math';
 import { VEHICLE_COUNT, TRAFFIC_LENGTH, VESSELS, vehicleAt, vesselAt } from '../simulation/routes';
+
 describe('verified bridge and attached cables', () => {
   it('preserves metric dimensions and cable end constraints', () => {
     expect(BRIDGE.mainSpan * 10).toBe(1280);
@@ -55,6 +56,7 @@ describe('verified bridge and attached cables', () => {
     expect(LANDMARKS.salesforce[1]).toBeGreaterThan(300);
   });
 });
+
 describe('one deterministic simulation', () => {
   it('freezes all times on pause and hidden tabs, clamps resume delta', () => {
     const c = new SimulationClock();

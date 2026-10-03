@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-03T12:00:38.870237+00:00",
+  "baselineRevision": "6c60c481c24b12fa0bc28b63e40437817bcf9d8f",
+  "method": "Local production Chromium, ANGLE Metal, reduced motion (shared clocks at zero), DPR 1, eight seconds settling per weather change. RGB channel differences on a 0\u2013255 scale; no image resizing. PMREM capture timing can vary between runs.",
+  "captures": [
+    {
+      "capture": "Bay.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "meanChannelDifference": 0.000147,
+      "maxChannelDifference": 1,
+      "pixelsAbove10ChannelDifferencePercent": 0.0
+    },
+    {
+      "capture": "Tower.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "meanChannelDifference": 0.000544,
+      "maxChannelDifference": 2,
+      "pixelsAbove10ChannelDifferencePercent": 0.0
+    },
+    {
+      "capture": "Waterline.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "meanChannelDifference": 0.000462,
+      "maxChannelDifference": 1,
+      "pixelsAbove10ChannelDifferencePercent": 0.0
+    },
+    {
+      "capture": "hero-Clear.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "meanChannelDifference": 2.5e-05,
+      "maxChannelDifference": 1,
+      "pixelsAbove10ChannelDifferencePercent": 0.0
+    },
+    {
+      "capture": "hero-Coastal.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "meanChannelDifference": 8e-06,
+      "maxChannelDifference": 1,
+      "pixelsAbove10ChannelDifferencePercent": 0.0
+    },
+    {
+      "capture": "hero-Golden.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "meanChannelDifference": 0.008769,
+      "maxChannelDifference": 2,
+      "pixelsAbove10ChannelDifferencePercent": 0.0
+    },
+    {
+      "capture": "mobile-settings.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "meanChannelDifference": 7e-06,
+      "maxChannelDifference": 1,
+      "pixelsAbove10ChannelDifferencePercent": 0.0
+    },
+    {
+      "capture": "mobile.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "meanChannelDifference": 0.000317,
+      "maxChannelDifference": 1,
+      "pixelsAbove10ChannelDifferencePercent": 0.0
+    },
+    {
+      "capture": "tower-high.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "meanChannelDifference": 0.000544,
+      "maxChannelDifference": 2,
+      "pixelsAbove10ChannelDifferencePercent": 0.0
+    }
+  ],
+  "browserErrorsBefore": [],
+  "browserErrorsAfter": []
+}

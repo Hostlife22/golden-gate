@@ -8,9 +8,11 @@ import {
   worldToBridge,
   terrainNoise,
 } from '../../simulation/math';
+
 export const LAND_POLYGONS: Point2[][] = coastline.rings.map((ring) =>
   ring.map((p) => project(p[0], p[1])),
 );
+
 // Natural Earth omits small Alcatraz. This schematic perimeter retains its real location and scale.
 LAND_POLYGONS.push(
   [
@@ -22,9 +24,11 @@ LAND_POLYGONS.push(
     [-7, 8],
   ].map(([x, z]) => [LANDMARKS.alcatraz[0] + x, LANDMARKS.alcatraz[1] + z]),
 );
+
 export function isLand(x: number, z: number) {
   return LAND_POLYGONS.some((p) => pointInPolygon(x, z, p));
 }
+
 export function shoreDistance(x: number, z: number) {
   let dist = 1e5;
   for (const polygon of LAND_POLYGONS)
@@ -35,9 +39,11 @@ export function shoreDistance(x: number, z: number) {
       );
   return dist;
 }
+
 function hill(x: number, z: number, cx: number, cz: number, r: number, h: number) {
   return h * Math.exp(-((x - cx) ** 2 + (z - cz) ** 2) / (r * r));
 }
+
 export function terrainHeight(x: number, z: number, distance?: number): number {
   if (!isLand(x, z)) return -1.8;
   const d = distance ?? shoreDistance(x, z),

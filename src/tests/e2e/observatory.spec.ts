@@ -1,11 +1,13 @@
 import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
+
 async function open(page: Page) {
   await page.goto('?diagnostics=1');
   await expect(page.locator('canvas')).toBeVisible();
   await expect.poll(() => page.evaluate(() => Boolean(window.__observatory))).toBe(true);
   await expect.poll(() => page.evaluate(() => window.__observatory?.().cameraFlying)).toBe(false);
 }
+
 async function view(page: Page, name: string) {
   await page
     .getByRole('button', {
@@ -15,6 +17,7 @@ async function view(page: Page, name: string) {
     .click();
   await page.getByRole('button', { name: new RegExp(`^0[1-7] ${name}`) }).click();
 }
+
 test('production scene, all camera presets, pause, orbit, hotkeys, settings and weather interruptions', async ({
   page,
 }) => {
@@ -96,6 +99,7 @@ test('production scene, all camera presets, pause, orbit, hotkeys, settings and 
   expect(errors).toEqual([]);
   expect(missing).toEqual([]);
 });
+
 test('mobile panels and short desktop keep controls in the viewport', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page);
@@ -114,6 +118,7 @@ test('mobile panels and short desktop keep controls in the viewport', async ({ p
   await expect(page.getByRole('button', { name: 'Pause animation' })).toBeInViewport();
   await expect(page.getByRole('button', { name: 'Reset view' })).toBeInViewport();
 });
+
 test('reduced motion begins paused and camera still works', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await open(page);
@@ -122,6 +127,7 @@ test('reduced motion begins paused and camera still works', async ({ page }) => 
   await expect.poll(() => page.evaluate(() => window.__observatory?.().cameraFlying)).toBe(false);
   expect(await page.evaluate(() => window.__observatory?.().time)).toBe(0);
 });
+
 test('WebGL fallback explains recovery without missing resources', async ({ page }) => {
   await page.goto('?forceFallback=1');
   await expect(page.getByText('This 3D view requires WebGL 2.', { exact: false })).toBeVisible();
@@ -148,6 +154,7 @@ test('hidden-tab visibility event freezes the shared clock and resumes without a
     .poll(() => page.evaluate(() => window.__observatory?.().time))
     .toBeGreaterThan(time ?? 0);
 });
+
 test('lost WebGL context offers recovery', async ({ page }) => {
   await open(page);
   await page.locator('canvas').evaluate((c) => {
@@ -156,4 +163,43 @@ test('lost WebGL context offers recovery', async ({ page }) => {
   });
   await expect(page.getByRole('button', { name: 'Try again' })).toBeVisible();
   await expect(page.locator('canvas')).toHaveCount(0);
+});
+
+test('extracted dialogs trap and restore focus and retain render quality across reopening', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  await open(page);
+  const settings = page.getByRole('button', { name: 'Scene settings' });
+  const close = page.getByRole('button', { name: 'Close panel' });
+  await settings.click();
+  await expect(close).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  await expect(page.getByLabel('Render quality')).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(close).toBeFocused();
+  await page.getByLabel('Render quality').selectOption('high');
+  await page.keyboard.press('Escape');
+  await expect(settings).toBeFocused();
+  await settings.click();
+  await expect(page.getByLabel('Render quality')).toHaveValue('high');
+  await page.locator('.panel-backdrop').click({ position: { x: 8, y: 8 } });
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  await expect(settings).toBeFocused();
+
+  const about = page.getByRole('button', { name: 'About this place' });
+  await about.click();
+  await expect(close).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  await expect(page.getByRole('link', { name: 'Source & study' })).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(close).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(about).toBeFocused();
+  expect(errors).toEqual([]);
 });
